@@ -1,0 +1,316 @@
+SCRIPT			# この行は絶対消さないこと！
+
+#------------------------------------------------------------------------------
+# テクスチャ数
+#------------------------------------------------------------------------------
+NUM_TEXTURE = 0
+
+#------------------------------------------------------------------------------
+# テクスチャファイル名
+#------------------------------------------------------------------------------
+
+#------------------------------------------------------------------------------
+# モデル数
+#------------------------------------------------------------------------------
+NUM_MODEL = 6
+
+#------------------------------------------------------------------------------
+# モデルファイル名
+#------------------------------------------------------------------------------
+MODEL_FILENAME = data/MODEL/well01.x				# [0]井戸
+MODEL_FILENAME = data/MODEL/smallhouse_1.x			# [1]家
+MODEL_FILENAME = data/MODEL/stone_1.x				# [2]石
+MODEL_FILENAME = data/MODEL/tree_1.x				# [3]木
+MODEL_FILENAME = data/MODEL/structure_stone00.x		# [4]石建造物
+MODEL_FILENAME = data/MODEL/chair_wood00.x			# [5]木の椅子
+
+#------------------------------------------------------------------------------
+# モデル配置情報
+#------------------------------------------------------------------------------
+
+#木
+#右
+MODELSET
+	TYPE = 3
+	POS = 500.0 20.0 0.0
+	ROT = 0.0 0.0 0.0
+END_MODELSET
+
+MODELSET
+	TYPE = 3
+	POS = 500.0 32.0 75.0
+	ROT = 0.0 0.0 0.0
+END_MODELSET
+
+MODELSET
+	TYPE = 3
+	POS = 500.0 20.0 110.0
+	ROT = 0.0 0.0 0.0
+END_MODELSET
+
+MODELSET
+	TYPE = 3
+	POS = 500.0 10.0 180.0
+	ROT = 0.0 0.0 0.0
+END_MODELSET
+
+MODELSET
+	TYPE = 3
+	POS = 500.0 20.0 290.0
+	ROT = 0.0 0.0 0.0
+END_MODELSET
+
+MODELSET
+	TYPE = 3
+	POS = 500.0 30.0 350
+	ROT = 0.0 0.0 0.0
+END_MODELSET
+
+MODELSET
+	TYPE = 3
+	POS = 500.0 37.0 410.0
+	ROT = 0.0 0.0 0.0
+END_MODELSET
+
+MODELSET
+	TYPE = 3
+	POS = 500.0 34.0 455.0
+	ROT = 0.0 0.0 0.0
+END_MODELSET
+
+MODELSET
+	TYPE = 3
+	POS = 500.0 23.0 -75.0
+	ROT = 0.0 0.0 0.0
+END_MODELSET
+
+MODELSET
+	TYPE = 3
+	POS = 500.0 22.0 -110.0
+	ROT = 0.0 0.0 0.0
+END_MODELSET
+
+MODELSET
+	TYPE = 3
+	POS = 500.0 11.0 -180.0
+	ROT = 0.0 0.0 0.0
+END_MODELSET
+
+MODELSET
+	TYPE = 3
+	POS = 500.0 8.0 -290.0
+	ROT = 0.0 0.0 0.0
+END_MODELSET
+
+MODELSET
+	TYPE = 3
+	POS = 500.0 11.0 -350
+	ROT = 0.0 0.0 0.0
+END_MODELSET
+
+MODELSET
+	TYPE = 3
+	POS = 500.0 7.0 -410.0
+	ROT = 0.0 0.0 0.0
+END_MODELSET
+
+#前
+MODELSET
+	TYPE = 3
+	POS = 0.0 20.0 500.0
+	ROT = 0.0 0.0 0.0
+END_MODELSET
+
+MODELSET
+	TYPE = 3
+	POS = 70.0 30.0 500.0
+	ROT = 0.0 0.0 0.0
+END_MODELSET
+
+MODELSET
+	TYPE = 3
+	POS = 140.0 35.0 500.0
+	ROT = 0.0 0.0 0.0
+END_MODELSET
+
+MODELSET
+	TYPE = 3
+	POS = 190.0 17.0 500.0
+	ROT = 0.0 0.0 0.0
+END_MODELSET
+
+MODELSET
+	TYPE = 3
+	POS = 230.0 14.0 500.0
+	ROT = 0.0 0.0 0.0
+END_MODELSET
+
+MODELSET
+	TYPE = 3
+	POS = 290.0 14.0 500.0
+	ROT = 0.0 0.0 0.0
+END_MODELSET
+
+MODELSET
+	TYPE = 3
+	POS = 320.0 17.0 500.0
+	ROT = 0.0 0.0 0.0
+END_MODELSET
+
+MODELSET
+	TYPE = 3
+	POS = 380.0 29.0 500.0
+	ROT = 0.0 0.0 0.0
+END_MODELSET
+
+MODELSET
+	TYPE = 3
+	POS = 440.0 33.0 500.0
+	ROT = 0.0 0.0 0.0
+END_MODELSET
+
+#後ろ
+MODELSET
+	TYPE = 3
+	POS = 0.0 25.0 -500.0
+	ROT = 0.0 0.0 0.0
+END_MODELSET
+
+MODELSET
+	TYPE = 3
+	POS = 70.0 19.0 -500.0
+	ROT = 0.0 0.0 0.0
+END_MODELSET
+
+MODELSET
+	TYPE = 3
+	POS = 140.0 19.0 -500.0
+	ROT = 0.0 0.0 0.0
+END_MODELSET
+
+MODELSET
+	TYPE = 3
+	POS = 190.0 20.0 -500.0
+	ROT = 0.0 0.0 0.0
+END_MODELSET
+
+MODELSET
+	TYPE = 3
+	POS = 230.0 23.0 -500.0
+	ROT = 0.0 0.0 0.0
+END_MODELSET
+
+MODELSET
+	TYPE = 3
+	POS = 290.0 30.0 -500.0
+	ROT = 0.0 0.0 0.0
+END_MODELSET
+
+MODELSET
+	TYPE = 3
+	POS = 320.0 27.0 -500.0
+	ROT = 0.0 0.0 0.0
+END_MODELSET
+
+MODELSET
+	TYPE = 3
+	POS = 380.0 15.0 -500.0
+	ROT = 0.0 0.0 0.0
+END_MODELSET
+
+MODELSET
+	TYPE = 3
+	POS = 440.0 10.0 -500.0
+	ROT = 0.0 0.0 0.0
+END_MODELSET
+
+#左
+MODELSET
+	TYPE = 3
+	POS = -500.0 50.0 -75.0
+	ROT = 0.0 0.0 0.0
+END_MODELSET
+
+MODELSET
+	TYPE = 3
+	POS = -500.0 34.0 -110.0
+	ROT = 0.0 0.0 0.0
+END_MODELSET
+
+MODELSET
+	TYPE = 3
+	POS = -500.0 30.0 -180.0
+	ROT = 0.0 0.0 0.0
+END_MODELSET
+
+MODELSET
+	TYPE = 3
+	POS = -500.0 25.0 -290.0
+	ROT = 0.0 0.0 0.0
+END_MODELSET
+
+MODELSET
+	TYPE = 3
+	POS = -500.0 31.0 -350
+	ROT = 0.0 0.0 0.0
+END_MODELSET
+
+MODELSET
+	TYPE = 3
+	POS = -500.0 42.0 -410.0
+	ROT = 0.0 0.0 0.0
+END_MODELSET
+
+#家
+MODELSET
+	TYPE = 1
+	POS = 300.0 0.0 300.0
+	ROT = 0.0 0.0 0.0
+END_MODELSET
+
+MODELSET
+	TYPE = 1
+	POS = 100.0 0.0 300.0
+	ROT = 0.0 0.0 0.0
+END_MODELSET
+
+#石
+MODELSET
+	TYPE = 2
+	POS = 200.0 0.0 40.0
+	ROT = 0.0 45.0 0.0
+END_MODELSET
+
+MODELSET
+	TYPE = 2
+	POS = 40.0 0.0 140.0
+	ROT = 0.0 45.0 0.0
+END_MODELSET
+
+MODELSET
+	TYPE = 2
+	POS = 140.0 0.0 -170.0
+	ROT = 0.0 45.0 0.0
+END_MODELSET
+
+#石建造物
+MODELSET
+	TYPE = 4
+	POS = -200.0 0.0 -250.0
+	ROT = 0.0 0.0 0.0
+END_MODELSET
+
+MODELSET
+	TYPE = 4
+	POS = -50.0 0.0 -220.0
+	ROT = 0.0 0.0 0.0
+END_MODELSET
+
+#井戸
+MODELSET
+	TYPE = 0
+	POS = -444.0 148.0 417.0
+	ROT = 0.0 0.0 0.0
+END_MODELSET
+
+END_SCRIPT		# この行は絶対消さないこと！
