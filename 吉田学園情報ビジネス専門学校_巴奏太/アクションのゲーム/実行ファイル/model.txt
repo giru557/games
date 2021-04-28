@@ -1,4 +1,4 @@
-SCRIPT			# この行は絶対消さないこと！
+SCRIPT
 
 #------------------------------------------------------------------------------
 # テクスチャ数
@@ -264,45 +264,45 @@ END_MODELSET
 #家
 MODELSET
 	TYPE = 1
-	POS = 300.0 0.0 300.0
+	POS = 300.0 1.0 300.0
 	ROT = 0.0 0.0 0.0
 END_MODELSET
 
 MODELSET
 	TYPE = 1
-	POS = 100.0 0.0 300.0
+	POS = 100.0 1.0 300.0
 	ROT = 0.0 0.0 0.0
 END_MODELSET
 
 #石
 MODELSET
 	TYPE = 2
-	POS = 200.0 0.0 40.0
+	POS = 200.0 1.0 40.0
 	ROT = 0.0 45.0 0.0
 END_MODELSET
 
 MODELSET
 	TYPE = 2
-	POS = 40.0 0.0 140.0
+	POS = 40.0 1.0 140.0
 	ROT = 0.0 45.0 0.0
 END_MODELSET
 
 MODELSET
 	TYPE = 2
-	POS = 140.0 0.0 -170.0
+	POS = 140.0 1.0 -170.0
 	ROT = 0.0 45.0 0.0
 END_MODELSET
 
 #石建造物
 MODELSET
 	TYPE = 4
-	POS = -200.0 0.0 -250.0
+	POS = -200.0 1.0 -250.0
 	ROT = 0.0 0.0 0.0
 END_MODELSET
 
 MODELSET
 	TYPE = 4
-	POS = -50.0 0.0 -220.0
+	POS = -50.0 1.0 -220.0
 	ROT = 0.0 0.0 0.0
 END_MODELSET
 
@@ -313,4 +313,4 @@ MODELSET
 	ROT = 0.0 0.0 0.0
 END_MODELSET
 
-END_SCRIPT		# この行は絶対消さないこと！
+END_SCRIPT

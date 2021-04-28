@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="ソース ファイル\TITLE">
+      <UniqueIdentifier>{92eaf737-73a4-43b2-a51d-5e6a51796604}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\GAME">
+      <UniqueIdentifier>{13d955e0-9aa2-446b-82be-26a24789097b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\RESULT">
+      <UniqueIdentifier>{d78e0034-7bfa-4cd6-9bbe-f4d4dd42ea82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\SYSTEM">
+      <UniqueIdentifier>{6f51e1d7-6273-4a0a-a79d-ea28af72fe33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\GAME">
+      <UniqueIdentifier>{75a00ca8-fed6-4ecb-96e8-e44afc5bfbe3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\SYSTEM">
+      <UniqueIdentifier>{3750f50a-5532-4e39-9a6e-be6aae03fa93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\RESULT">
+      <UniqueIdentifier>{7ffdd62e-c67a-4212-a08f-dc7c2f35ac73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\TITLE">
+      <UniqueIdentifier>{6ea92e11-835f-4d6b-ad97-d829e0babbe5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="billboard.cpp">
+      <Filter>ソース ファイル\GAME</Filter>
+    </ClCompile>
+    <ClCompile Include="bullet.cpp">
+      <Filter>ソース ファイル\GAME</Filter>
+    </ClCompile>
+    <ClCompile Include="camera.cpp">
+      <Filter>ソース ファイル\GAME</Filter>
+    </ClCompile>
+    <ClCompile Include="light.cpp">
+      <Filter>ソース ファイル\GAME</Filter>
+    </ClCompile>
+    <ClCompile Include="meshfield.cpp">
+      <Filter>ソース ファイル\GAME</Filter>
+    </ClCompile>
+    <ClCompile Include="model.cpp">
+      <Filter>ソース ファイル\GAME</Filter>
+    </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>ソース ファイル\GAME</Filter>
+    </ClCompile>
+    <ClCompile Include="polygon.cpp">
+      <Filter>ソース ファイル\GAME</Filter>
+    </ClCompile>
+    <ClCompile Include="shadow.cpp">
+      <Filter>ソース ファイル\GAME</Filter>
+    </ClCompile>
+    <ClCompile Include="wall.cpp">
+      <Filter>ソース ファイル\GAME</Filter>
+    </ClCompile>
+    <ClCompile Include="input.cpp">
+      <Filter>ソース ファイル\SYSTEM</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>ソース ファイル\SYSTEM</Filter>
+    </ClCompile>
+    <ClCompile Include="result.cpp">
+      <Filter>ソース ファイル\RESULT</Filter>
+    </ClCompile>
+    <ClCompile Include="title.cpp">
+      <Filter>ソース ファイル\TITLE</Filter>
+    </ClCompile>
+    <ClCompile Include="fade.cpp">
+      <Filter>ソース ファイル\SYSTEM</Filter>
+    </ClCompile>
+    <ClCompile Include="game.cpp">
+      <Filter>ソース ファイル\GAME</Filter>
+    </ClCompile>
+    <ClCompile Include="motion.cpp">
+      <Filter>ソース ファイル\GAME</Filter>
+    </ClCompile>
+    <ClCompile Include="field.cpp">
+      <Filter>ソース ファイル\GAME</Filter>
+    </ClCompile>
+    <ClCompile Include="enemy.cpp">
+      <Filter>ソース ファイル\GAME</Filter>
+    </ClCompile>
+    <ClCompile Include="collision.cpp">
+      <Filter>ソース ファイル\GAME</Filter>
+    </ClCompile>
+    <ClCompile Include="healthbar.cpp">
+      <Filter>ソース ファイル\GAME</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>ソース ファイル\GAME</Filter>
+    </ClCompile>
+    <ClCompile Include="sound.cpp">
+      <Filter>ソース ファイル\SYSTEM</Filter>
+    </ClCompile>
+    <ClCompile Include="2DAnimation.cpp">
+      <Filter>ソース ファイル\GAME</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="billboard.h">
+      <Filter>ヘッダー ファイル\GAME</Filter>
+    </ClInclude>
+    <ClInclude Include="bullet.h">
+      <Filter>ヘッダー ファイル\GAME</Filter>
+    </ClInclude>
+    <ClInclude Include="camera.h">
+      <Filter>ヘッダー ファイル\GAME</Filter>
+    </ClInclude>
+    <ClInclude Include="light.h">
+      <Filter>ヘッダー ファイル\GAME</Filter>
+    </ClInclude>
+    <ClInclude Include="meshfield.h">
+      <Filter>ヘッダー ファイル\GAME</Filter>
+    </ClInclude>
+    <ClInclude Include="model.h">
+      <Filter>ヘッダー ファイル\GAME</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>ヘッダー ファイル\GAME</Filter>
+    </ClInclude>
+    <ClInclude Include="shadow.h">
+      <Filter>ヘッダー ファイル\GAME</Filter>
+    </ClInclude>
+    <ClInclude Include="polygon.h">
+      <Filter>ヘッダー ファイル\GAME</Filter>
+    </ClInclude>
+    <ClInclude Include="wall.h">
+      <Filter>ヘッダー ファイル\GAME</Filter>
+    </ClInclude>
+    <ClInclude Include="input.h">
+      <Filter>ヘッダー ファイル\SYSTEM</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>ヘッダー ファイル\SYSTEM</Filter>
+    </ClInclude>
+    <ClInclude Include="result.h">
+      <Filter>ヘッダー ファイル\RESULT</Filter>
+    </ClInclude>
+    <ClInclude Include="title.h">
+      <Filter>ヘッダー ファイル\TITLE</Filter>
+    </ClInclude>
+    <ClInclude Include="fade.h">
+      <Filter>ヘッダー ファイル\SYSTEM</Filter>
+    </ClInclude>
+    <ClInclude Include="game.h">
+      <Filter>ヘッダー ファイル\GAME</Filter>
+    </ClInclude>
+    <ClInclude Include="motion.h">
+      <Filter>ヘッダー ファイル\GAME</Filter>
+    </ClInclude>
+    <ClInclude Include="field.h">
+      <Filter>ヘッダー ファイル\GAME</Filter>
+    </ClInclude>
+    <ClInclude Include="enemy.h">
+      <Filter>ヘッダー ファイル\GAME</Filter>
+    </ClInclude>
+    <ClInclude Include="collision.h">
+      <Filter>ヘッダー ファイル\GAME</Filter>
+    </ClInclude>
+    <ClInclude Include="healthbar.h">
+      <Filter>ヘッダー ファイル\GAME</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>ヘッダー ファイル\GAME</Filter>
+    </ClInclude>
+    <ClInclude Include="sound.h">
+      <Filter>ヘッダー ファイル\SYSTEM</Filter>
+    </ClInclude>
+    <ClInclude Include="2DAnimation.h">
+      <Filter>ヘッダー ファイル\GAME</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
