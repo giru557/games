@@ -16,11 +16,6 @@
 // マクロ定義
 //*****************************************************************************
 #define BG_DRAW_PRIORITY (0)
-#define BG_TEXTURE_NUM (1)
-#define BG_TEXTURE_0_PATH ("resource\\texture\\bg000.png")
-#define BG_TEXTURE_0_SPEED (0.005f)
-#define BG_TEXTURE_1_SPEED (0.002f)
-#define BG_TEXTURE_2_SPEED (0.0007f)
 
 //*****************************************************************************
 // 背景クラス ( 派生元: オブジェクトクラス (scene) )
@@ -28,6 +23,14 @@
 class CBackground : public CScene
 {
 public:
+	typedef enum {	// 背景のフェード状態
+		BG_FADE_NONE = 0,
+		BG_FADE_OUT,
+		BG_FADE_IN,
+
+		BG_FADE_MAX,
+	} BG_FADE;
+
 	CBackground();
 	~CBackground();
 
@@ -43,10 +46,14 @@ public:
 	D3DXVECTOR3 GetRot(void) { return VECTOR3_ZERO; }
 	D3DXVECTOR2 GetSize(void) { return (D3DXVECTOR2)VECTOR3_ZERO; }
 
+	void SetFade(BG_FADE fade);
+	BG_FADE GetFade(void) { return m_fade; }
 	static CBackground *Create(void);
 
 private:
 	CScene2D *m_pScene2D;	// 2Dポリゴンクラスのポインタ
+	BG_FADE m_fade;			// 現在のフェード状態
+	float m_fFadeValue;		// フェードの値
 };
 
 #endif

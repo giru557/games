@@ -150,6 +150,15 @@
     <ClCompile Include="source\debris.cpp">
       <Filter>ソース ファイル\Object</Filter>
     </ClCompile>
+    <ClCompile Include="source\light.cpp">
+      <Filter>ソース ファイル\Management</Filter>
+    </ClCompile>
+    <ClCompile Include="source\camera3d.cpp">
+      <Filter>ソース ファイル\Management</Filter>
+    </ClCompile>
+    <ClCompile Include="source\bg3d.cpp">
+      <Filter>ソース ファイル\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\main.h">
@@ -267,6 +276,15 @@
       <Filter>ヘッダー ファイル\Object</Filter>
     </ClInclude>
     <ClInclude Include="source\debris.h">
+      <Filter>ヘッダー ファイル\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="source\light.h">
+      <Filter>ヘッダー ファイル\Management</Filter>
+    </ClInclude>
+    <ClInclude Include="source\camera3d.h">
+      <Filter>ヘッダー ファイル\Management</Filter>
+    </ClInclude>
+    <ClInclude Include="source\bg3d.h">
       <Filter>ヘッダー ファイル\Object</Filter>
     </ClInclude>
   </ItemGroup>

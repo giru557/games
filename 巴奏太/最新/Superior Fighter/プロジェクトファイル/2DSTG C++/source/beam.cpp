@@ -12,6 +12,8 @@
 #include "particle.h"
 #include "player.h"
 #include "sound.h"
+#include "bg3d.h"
+#include "boss_core.h"
 
 //*****************************************************************************
 // ビームクラス ( 継承元: オブジェクトクラス [scene] )
@@ -24,6 +26,9 @@ CBeam::CBeam()
 {
 	m_nDamageCooltime = BEAM_DAMAGE_COOLTIME;
 	m_bHitPlayer = false;
+	m_beamState = BEAMSTATE_START;
+	m_fBeamSizeMul = 0.1f;
+	m_fBeamColMul = 1.0f;
 }
 
 //=============================================================================
@@ -40,6 +45,7 @@ CBeam::~CBeam()
 HRESULT CBeam::Init(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXVECTOR2 size)
 {
 	m_pos = pos;
+	m_rot = rot;
 	m_sizeV = size;
 	for (int nCntBeam = 0; nCntBeam < BEAM_OBJUSAGE; nCntBeam++) {
 		if (nCntBeam == 0) {
@@ -81,16 +87,51 @@ void CBeam::Update(void)
 {
 	static int nCountFrame;
 	nCountFrame++;
+	
+	// ビーム状態による処理
+	switch (m_beamState)
+	{
+	case BEAMSTATE_START:
+		m_fBeamSizeMul += 0.06f;
+		if (m_fBeamSizeMul >= 1.0f) {
+			m_fBeamSizeMul = 1.0f;
+			m_beamState = BEAMSTATE_NONE;
+		}
+		break;
+
+	case BEAMSTATE_END:
+		m_fBeamSizeMul -= 0.01f;
+		m_fBeamColMul -= 0.01f;
+		if (m_fBeamSizeMul <= 0 && m_fBeamColMul <= 0) {
+			nCountFrame = 0;
+			Uninit();
+			return;
+		}
+		break;
+
+	default:
+		break;
+	}
 
 	// 発動フレームをカウントしてビームを消す
 	if (nCountFrame >= m_nActiveFrames) {
-		Uninit();
-
-		nCountFrame = 0;
+		m_beamState = BEAMSTATE_END;
 	}
 
 	// プレイヤーに対するダメージクールタイムを設ける
 	Cooltime();
+	
+	for (int nCnt = 0; nCnt < 2; nCnt++) {
+		// サイズ、透明度変更
+		m_apScene[nCnt]->SetSize(D3DXVECTOR2(BOSS_CORE_BEAMATTACK_SIZE.x * m_fBeamSizeMul, BOSS_CORE_BEAMATTACK_SIZE.y));
+		m_apScene[nCnt]->SetColor(D3DXCOLOR(1, 0, 0, m_fBeamColMul));
+
+		// 回転更新
+		m_apScene[0]->SetRot(m_rot);
+		m_apScene[1]->SetRot(D3DXVECTOR3(m_rot.x, m_rot.y, m_rot.z + D3DX_PI / 2));
+
+		m_apScene[nCnt]->UpdateVertex();
+	}
 }
 
 //=============================================================================
@@ -126,6 +167,7 @@ void CBeam::Cooltime(void)
 	static int nFrameCounter;
 	if (m_bHitPlayer) {
 		if (nFrameCounter == 0) {
+			CGame::GetBG3D()->SetRippleFrequency(0.07f, 1);
 			CGame::GetLife()->Damage(1);
 			CParticle::Create(
 				CGame::GetPlayer()->GetPos(),

@@ -15,6 +15,8 @@
 #include "textureloader.h"
 #include "debugger.h"
 #include "pause.h"
+#include "camera3d.h"
+#include "light.h"
 
 //*****************************************************************************
 // 静的メンバ変数
@@ -30,6 +32,8 @@ CFade  *CManager::m_pFade = NULL;
 CCamera *CManager::m_pCamera = NULL;
 CPause *CManager::m_pPause = NULL;
 CTextureLoad *CManager::m_pTextureLoad = NULL;
+CCamera3D *CManager::m_pCamera3D = NULL;
+CLight *CManager::m_pLight = NULL;
 CManager::MODE CManager::m_mode = CManager::MODE_TITLE;
 #ifdef _DEBUG
 CDebug *CManager::m_pDebug = NULL;
@@ -65,6 +69,18 @@ HRESULT CManager::Init(HINSTANCE hInstance, HWND hWnd, BOOL bWindow)
 	if (FAILED(m_pRenderer->Init(hWnd, bWindow)))
 	{
 		return E_FAIL;
+	}
+
+	// ライトを生成
+	m_pLight = new CLight;
+	if (m_pLight != NULL) {
+		m_pLight->Init();
+	}
+
+	// 3Dカメラを生成
+	m_pCamera3D = new CCamera3D;
+	if (m_pCamera3D != NULL) {
+		m_pCamera3D->Init();
 	}
 
 	// キーボードクラスの生成、初期化
@@ -199,6 +215,20 @@ void CManager::Uninit(void)
 		m_pInputMouse = NULL;
 	}
 
+	// カメラ破棄
+	if (m_pCamera3D != NULL) {
+		m_pCamera3D->Uninit();
+		delete m_pCamera3D;
+		m_pCamera3D = NULL;
+	}
+
+	// ライトを破棄
+	if (m_pLight != NULL) {
+		m_pLight->Uninit();
+		delete m_pLight;
+		m_pLight = NULL;
+	}
+
 	// レンダラの破棄
 	if (m_pRenderer != NULL)
 	{
@@ -244,6 +274,15 @@ void CManager::Update(void)
 	if (m_pCamera != NULL)
 	{
 		m_pCamera->Update();
+	}
+
+	if (m_pCamera3D != NULL) {
+		m_pCamera3D->Update();
+	}
+
+	// ライトの更新
+	if (m_pLight != NULL) {
+		m_pLight->Update();
 	}
 
 	// ポーズの更新

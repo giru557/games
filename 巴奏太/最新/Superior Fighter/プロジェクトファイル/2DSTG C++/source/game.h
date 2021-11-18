@@ -20,16 +20,6 @@
 #define GAME_FIELD_WIDTH (5000)		// フィールドの幅
 #define GAME_FIELD_HEIGHT (5000)	// フィールドの高さ
 
-#define SPAWN_POINT_1 (D3DXVECTOR3(-100.0f, -100.0f, 0.0f))
-#define SPAWN_POINT_2 (D3DXVECTOR3(GAME_FIELD_WIDTH / 2, -100.0f, 0.0f))
-#define SPAWN_POINT_3 (D3DXVECTOR3(GAME_FIELD_WIDTH + 100.0f, -100.0f, 0.0f))
-#define SPAWN_POINT_4 (D3DXVECTOR3(-100.0f, GAME_FIELD_HEIGHT / 2, 0.0f))
-#define SPAWN_POINT_5 (D3DXVECTOR3(GAME_FIELD_WIDTH + 100.0f, GAME_FIELD_HEIGHT / 2, 0.0f))
-#define SPAWN_POINT_6 (D3DXVECTOR3(-100.0f, GAME_FIELD_HEIGHT + 100.0f, 0.0f))
-#define SPAWN_POINT_7 (D3DXVECTOR3(GAME_FIELD_WIDTH / 2, GAME_FIELD_HEIGHT + 100.0f, 0.0f))
-#define SPAWN_POINT_8 (D3DXVECTOR3(GAME_FIELD_WIDTH + 100.0f, GAME_FIELD_HEIGHT + 100.0f, 0.0f))
-
-
 //*****************************************************************************
 // 前方宣言
 //*****************************************************************************
@@ -44,9 +34,10 @@ class CHelp;
 class CMiniMap;
 class CEnergy;
 class CBossManager;
+class CBackground3D;
 
 //*****************************************************************************
-// ゲーム画面クラス ( 継承元: オブジェクトクラス [scene] )
+// ゲーム画面クラス ( 継承元: オブジェクトクラス [CScene] )
 //*****************************************************************************
 class CGame : public CScene
 {
@@ -89,6 +80,7 @@ public:
 	static CMiniMap *GetMap(void) { return m_pMap; }
 	static CEnergy *GetEnergy(void) { return m_pEnergy; }
 	static CBossManager *GetBoss(void) { return m_pBoss; }
+	static CBackground3D *GetBG3D(void) { return m_pBG3D; }
 
 private:
 	static GAMESTATUS m_status;
@@ -103,6 +95,7 @@ private:
 	static CMiniMap *m_pMap;
 	static CEnergy *m_pEnergy;
 	static CBossManager *m_pBoss;
+	static CBackground3D *m_pBG3D;
 };
 #endif
 

@@ -38,6 +38,7 @@ using namespace std;	// 名前空間指定
 // マクロ定義
 //*****************************************************************************
 #define FVF_VERTEX_2D (D3DFVF_XYZRHW | D3DFVF_DIFFUSE | D3DFVF_TEX1)	// 頂点フォーマット
+#define FVF_VERTEX_3D (D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_DIFFUSE | D3DFVF_TEX2)	// 頂点フォーマット3D
 #define SCREEN_WIDTH (1920)				// スクリーンの幅	
 #define SCREEN_HEIGHT (1080)			// スクリーンの高さ
 #define SCREEN_CENTER (D3DXVECTOR2(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2))	// スクリーンの中心

@@ -32,6 +32,10 @@
 #include "boss_manager.h"
 #include "collision.h"
 #include "debris.h"
+#include "light.h"
+#include "camera3d.h"
+#include "bg3d.h"
+#include "textureloader.h"
 
 //*****************************************************************************
 // 静的メンバ変数
@@ -48,6 +52,7 @@ CHelp *CGame::m_pHelp = NULL;
 CMiniMap *CGame::m_pMap = NULL;
 CEnergy *CGame::m_pEnergy = NULL;
 CBossManager *CGame::m_pBoss = NULL;
+CBackground3D *CGame::m_pBG3D = NULL;
 
 //*****************************************************************************
 // ゲーム画面クラス ( 継承元: オブジェクトクラス [scene] )
@@ -74,9 +79,11 @@ CGame::~CGame()
 //=============================================================================
 HRESULT CGame::Init(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXVECTOR2 size)
 {
+	// 3Dオブジェクト生成
+	m_pBG3D = CBackground3D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, 0, SCREEN_HEIGHT / 2), VECTOR3_ZERO, BG_SIZE, BG_DIVISION_X, BG_DIVISION_Z);
+
 	// オブジェクトを生成
 	m_pPlayer = CPlayer::Create(D3DXVECTOR3(GAME_FIELD_WIDTH / 2, GAME_FIELD_HEIGHT /2 , 0), VECTOR3_ZERO, D3DXVECTOR2(PLAYER_WIDTH, PLAYER_HEIGHT));
-	m_pBG = CBackground::Create();
 	m_pLife = CLife::Create(LIFE_POSITION, VECTOR3_ZERO);
 	m_pScore = CScore::Create(SCORE_POSITION, VECTOR3_ZERO, D3DXVECTOR2(50, 50));
 	m_pCrosshair = CCrosshair::Create();
@@ -97,7 +104,7 @@ HRESULT CGame::Init(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXVECTOR2 size)
 //=============================================================================
 void CGame::Uninit(void)
 {
-	CManager::GetSound()->Stop();	// stop BGM
+	CManager::GetSound()->Stop();	// Stop BGM
 
 	// このオブジェクトの開放
 	this->Release();
@@ -117,27 +124,13 @@ void CGame::Update(void)
 		CManager::GetFade()->FadeOUT(CManager::MODE_RESULT);
 	}
 
-	if (pKeyboard->GetTrigger(DIK_V)) {
-		CParticle::Create(
-			CGame::GetPlayer()->GetPos() + D3DXVECTOR3(sinf(CGame::GetPlayer()->GetRot().z + D3DX_PI), cosf(CGame::GetPlayer()->GetRot().z + D3DX_PI), 0) * 50,
-			VECTOR3_ZERO,
-			D3DXCOLOR(1.0f, 0.4f, 0.0f, 1.0f),
-			D3DXVECTOR2(30, 30),
-			CEffect::EFFECT_TEX_DEFAULT,
-			1,
-			10.0f,
-			20,
-			0.01f,
-			0.01f,
-			D3DXToDegree(CGame::GetPlayer()->GetRot().z),
-			160);
+	if (pKeyboard->GetTrigger(DIK_B)) {
+		m_pBG3D->SetRippleFrequency(0.07f, 1);
 	}
 	
-	if (pKeyboard->GetTrigger(DIK_B)) {
-		CManager::GetSound()->Play(CSound::SOUND_LABEL_SE_FORCEFIELD);
-	}
 #endif
 
+	// ゲームの進行度を監視
 	if (m_status == GAMESTATUS_CLEAR || m_status == GAMESTATUS_OVER)
 	{
 		// フェードアウトして次のモード

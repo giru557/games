@@ -8,6 +8,8 @@
 #include "manager.h"
 #include "game.h"
 #include "input.h"
+#include "bg.h"
+#include "bg3d.h"
 
 //*****************************************************************************
 // ボス管理クラス ( 継承元: オブジェクトクラス [ scene ] )
@@ -54,9 +56,9 @@ void CBossManager::Uninit(void)
 //=============================================================================
 void CBossManager::Update(void)
 {
+	static int nCounterBeamAttack;
+	static int aCounterChargedShot[4];
 	if (m_bActive) {
-		static int nCounterBeamAttack;
-		static int aCounterChargedShot[4];
 
 		// 発動中以外カウントアップ
 		for (int nCnt = 0; nCnt < 4; nCnt++) {
@@ -85,7 +87,7 @@ void CBossManager::Update(void)
 			m_nBeamAttackActivateTime = BOSS_CORE_BEAMATTACK_ACTIVATETIME * 60;
 		}
 
-#ifdef _DEBUG
+//#ifdef _DEBUG
 		if (CManager::GetInputKeyboard()->GetTrigger(DIK_M)) {
 			m_pSceneCore->SetBeamAttack();
 		}
@@ -97,7 +99,17 @@ void CBossManager::Update(void)
 			D3DXVECTOR3 coreRot = m_pSceneCore->GetRotDest();
 			m_pSceneCore->SetRotDest(D3DXVECTOR3(coreRot.x, coreRot.y, coreRot.z - 0.02f));
 		}
-#endif
+//#endif
+	}
+	else {
+		nCounterBeamAttack = 0;
+		for (int nCnt = 0; nCnt < 4; nCnt++) {
+			aCounterChargedShot[nCnt] = 0;
+		}
+	}
+
+	if (m_pBG != NULL && m_pBG->GetFade() == CBackground::BG_FADE_IN) {
+		CManager::GetGame()->GetBG3D()->SetBossTexture();
 	}
 }
 
@@ -129,6 +141,11 @@ CBossManager *CBossManager::Create(void)
 //=============================================================================
 void CBossManager::SpawnBoss(void)
 {
+	// 背景フェード
+	m_pBG = CBackground::Create();
+	m_pBG->SetFade(CBackground::BG_FADE_OUT);
+	
+	// ボス生成
 	D3DXVECTOR3 fieldCenter = D3DXVECTOR3(GAME_FIELD_WIDTH / 2, GAME_FIELD_HEIGHT / 2, 0);
 	m_pSceneCore = CBossCore::Create(fieldCenter, BOSS_SPAWNCORE_ROTATION);
 	m_apSceneTurret[0] = CBossTurret::Create(fieldCenter + D3DXVECTOR3(-BOSS_SPAWNPOS_OFFSET, 0, 0));

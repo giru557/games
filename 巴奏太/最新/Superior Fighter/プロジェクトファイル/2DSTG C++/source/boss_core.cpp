@@ -96,6 +96,14 @@ void CBossCore::Update(void)
 	// 画面外のやつを描画しない
 	this->CheckScreen();
 
+	// コア本体の回転
+	this->SetRotDest(D3DXVECTOR3(0, 0, GetRotDest().z + 0.005f));
+
+	// ビーム本体の回転
+	if (m_pBeam != NULL) {
+		m_pBeam->SetRot(GetRot());
+	}
+
 	// 死亡確認
 	if (m_nLife <= 0)
 	{

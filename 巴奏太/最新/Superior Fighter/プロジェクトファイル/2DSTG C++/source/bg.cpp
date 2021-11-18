@@ -18,6 +18,7 @@
 //=============================================================================
 CBackground::CBackground()
 {
+	m_fFadeValue = 0.0f;
 	m_pScene2D = NULL;
 }
 
@@ -34,14 +35,9 @@ CBackground::~CBackground()
 //=============================================================================
 HRESULT CBackground::Init(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXVECTOR2 size)
 {
-	m_pScene2D = CScene2D::Create(pos, rot, size);	// Instantiate
-	m_pScene2D->BindTexture(CManager::GetTextureLoad()->m_TextureMp["BACKGROUND"]);	// テクスチャ設定
+	m_pScene2D = CScene2D::Create(pos, rot, size);
+	m_pScene2D->BindTexture(NULL);					// テクスチャ設定
 	m_pScene2D->SetPriority(BG_DRAW_PRIORITY);		// 描画優先度設定
-	m_pScene2D->SetTextureUV(						// テクスチャ座標設定
-		D3DXVECTOR2(0.0f, 3.0f),
-		D3DXVECTOR2(0.0f, 0.0f),
-		D3DXVECTOR2(3.0f, 3.0f),
-		D3DXVECTOR2(3.0f, 0.0f));
 
 	return S_OK;
 }
@@ -60,7 +56,30 @@ void CBackground::Uninit(void)
 //=============================================================================
 void CBackground::Update(void)
 {
+	// フェード処理
+	switch (m_fade)
+	{
+	case BG_FADE_IN:
+		m_fFadeValue -= 0.02f;
+		if (m_fFadeValue <= 0) {
+			m_fFadeValue = 0.0f;
+			m_fade = BG_FADE_NONE;
+		}
+		break;
 
+	case BG_FADE_OUT:
+		m_fFadeValue += 0.02f;
+		if (m_fFadeValue >= 1.0f) {
+			m_fade = BG_FADE_IN;
+		}
+		break;
+
+	default:
+		break;
+	}
+
+	// 透明度設定
+	m_pScene2D->SetColor(D3DXCOLOR(0, 0, 0, m_fFadeValue));
 }
 
 //=============================================================================
@@ -85,4 +104,12 @@ CBackground *CBackground::Create(void)
 	}
 
 	return pBG;
+}
+
+//=============================================================================
+// フェード
+//=============================================================================
+void CBackground::SetFade(CBackground::BG_FADE fade)
+{
+	m_fade = fade;
 }

@@ -8,6 +8,8 @@
 #include "manager.h"
 #include "fade.h"
 #include "debugger.h"
+#include "camera3d.h"
+#include "game.h"
 
 //*****************************************************************************
 // レンダラークラス (基本)
@@ -111,7 +113,7 @@ HRESULT CRenderer::Init(HWND hWnd, BOOL bWindow)
 	m_pD3DDevice->SetTextureStageState(0, D3DTSS_ALPHAARG2, D3DTA_CURRENT);
 
 #ifdef _DEBUG
-	
+	//m_pD3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
 #endif
 
 	return S_OK;
@@ -166,6 +168,9 @@ void CRenderer::Draw(void)
 	// Direct3Dによる描画の開始
 	if (SUCCEEDED(m_pD3DDevice->BeginScene()))
 	{
+		// カメラを設置
+		CManager::GetCamera3D()->SetCamera(m_pD3DDevice);
+
 		// すべてのオブジェクトの描画
 		CScene::DrawAll();
 

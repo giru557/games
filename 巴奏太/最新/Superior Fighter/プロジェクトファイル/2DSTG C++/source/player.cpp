@@ -18,6 +18,7 @@
 #include "sound.h"
 #include "energy.h"
 #include "particle.h"
+#include "bg3d.h"
 
 //*****************************************************************************
 // プレイヤークラス ( 継承元: 2Dポリゴン [scene2D] )
@@ -93,8 +94,6 @@ void CPlayer::Update(void)
 	D3DXVECTOR2 cursorPos = pMouse->GetPos();
 	D3DXVECTOR2 playerPosScreen = CCamera::WorldToScreenPosition(pos);
 
-	if (CGame::GetLife()->GetLife() > 0)
-	{
 		// 位置の更新と減衰の設定
 		m_move.x += (0 - m_move.x) * m_fSpeedDecay;
 		m_move.y += (0 - m_move.y) * m_fSpeedDecay;
@@ -135,13 +134,14 @@ void CPlayer::Update(void)
 		// カメラ位置の設定
 		CCamera *pCamera = CManager::GetCamera();
 		pCamera->SetCameraCenter(GetPos());
-	}
-	else
-	{
-		this->SetColor(D3DXCOLOR(0.0f, 0.0f, 0.0f, 0.0f));
-		CSpriteSheet::Create(pos, VECTOR3_ZERO, D3DXVECTOR2(300.0f, 300.0f), CSpriteSheet::SPRITESHEET_EXPLOSION2);
-		CManager::GetCamera()->Shake(5.0f, 60);
-	}
+
+		// 死亡確認
+		if (CGame::GetLife()->GetLife() <= 0) {
+			this->SetColor(D3DXCOLOR(0.0f, 0.0f, 0.0f, 0.0f));
+			CSpriteSheet::Create(pos, VECTOR3_ZERO, D3DXVECTOR2(300.0f, 300.0f), CSpriteSheet::SPRITESHEET_EXPLOSION2);
+			CManager::GetCamera()->Shake(5.0f, 60);
+			Uninit();
+		}
 }
 
 //=============================================================================
@@ -209,35 +209,21 @@ void CPlayer::SmoothTurn(void)
 
 	//差分がD3DX_PI以上(半周以上)の場合、逆回転
 	if (RotDiff.z > D3DX_PI)
-	{
 		PlayerRot.z -= ((D3DX_PI * 2) - RotDiff.z) * fTurnValue;
-	}
 	else if (RotDiff.z < -D3DX_PI)
-	{
 		PlayerRot.z += ((D3DX_PI * 2) + RotDiff.z) * fTurnValue;
-	}
 	else
-	{
 		PlayerRot.z += RotDiff.z * fTurnValue;
-	}
 
-	// 回転の修正 (3.14超えたら±逆に)
+	// 回転の修正
 	if (PlayerRot.z > D3DX_PI)
-	{
 		PlayerRot.z -= D3DX_PI * 2.0f;
-	}
 	else if (PlayerRot.z < -D3DX_PI)
-	{
 		PlayerRot.z += D3DX_PI * 2.0f;
-	}
 	if (m_rotDest.z > D3DX_PI)
-	{
 		m_rotDest.z -= D3DX_PI * 2.0f;
-	}
 	else if (m_rotDest.z < -D3DX_PI)
-	{
 		m_rotDest.z += D3DX_PI * 2.0f;
-	}
 
 	// 変更した回転を反映させる
 	SetRot(PlayerRot);
@@ -347,7 +333,7 @@ void CPlayer::FullAuto4(void)
 void CPlayer::Dash(void)
 {
 	D3DXVECTOR3 rot = GetRot();
-
+	
 	// ダッシュ時のカウントが溜まったらダッシュフラグを切る
 	static int nDashCounter;
 	nDashCounter++;
@@ -385,9 +371,13 @@ void CPlayer::StateManage(void)
 	// スペースキーでダッシュを有効にする
 	if (m_bPowered) {
 		if (pKeyboard->GetTrigger(DIK_SPACE)) {
-			if (CGame::GetEnergy()->UseEnergy(20)) {
-				m_bDash = true;
-				CManager::GetSound()->Play(CSound::SOUND_LABEL_SE_DASH00);
+			if (GetDashState() == false) {
+				if (CGame::GetEnergy()->UseEnergy(20)) {
+					m_bDash = true;
+					CGame::GetBG3D()->SetRippleFrequency(0.07f, PLAYER_DASH_FRAMES);
+					CGame::GetBG3D()->SetRippleAmplitude(25.0f, PLAYER_DASH_FRAMES);
+					CManager::GetSound()->Play(CSound::SOUND_LABEL_SE_DASH00);
+				}
 			}
 		}
 	}
@@ -407,9 +397,10 @@ void CPlayer::CollideEnemy(CEnemy *pEnemy)
 		if (!pEnemy->GetHit()) {
 			// 衝突クールダウンが解消されている場合
 
-			CGame::GetLife()->Damage(1);	// プレイヤーにダメージ
+			CGame::GetLife()->Damage(1);									// プレイヤーにダメージ
 			CManager::GetSound()->Play(CSound::SOUND_LABEL_SE_IMPACT00);	// 効果音
-			CParticle *pParticle = CParticle::Create(	// パーティクル
+			CGame::GetBG3D()->SetRippleFrequency(0.07f, 1);					// 波紋エフェクト
+			CParticle *pParticle = CParticle::Create(						// パーティクル
 				GetPos(),
 				true,
 				D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f),

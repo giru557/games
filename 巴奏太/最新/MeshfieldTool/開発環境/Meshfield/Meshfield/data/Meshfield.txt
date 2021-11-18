@@ -1,0 +1,28 @@
+//===================================================================
+// メッシュフィールドの設定
+// Author: Sota Tomoe
+//===================================================================
+// ブレンドの種類: MODULATE, ADD, ADDSMOOTH, SUBTRACT
+
+#START
+
+MESH_SIZE_X = 500	// フィールドの大きさ X
+MESH_SIZE_Z = 500	// フィールドの大きさ Z
+
+MESH_DIVISION_X = 64	// フィールドの分割数 X
+MESH_DIVISION_Z = 64	// フィールドの分割数 Z
+
+// テクスチャ設定
+SET_MESH_TEXTURE
+	PATH = data/texture/bg000.png
+	DIVISION = 1.0
+END_MESH_TEXTURE
+
+// 二枚目のテクスチャ設定
+SET_MESH_TEXTURE
+	PATH = data/texture/bg001.png
+	DIVISION = 1.0
+	BLEND = ADDSMOOTH
+END_MESH_TEXTURE
+
+#END

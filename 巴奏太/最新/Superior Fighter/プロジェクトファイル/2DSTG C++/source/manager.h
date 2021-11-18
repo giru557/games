@@ -27,6 +27,8 @@ class CCamera;
 class CTextureLoad;
 class CDebug;
 class CPause;
+class CCamera3D;
+class CLight;
 
 //*****************************************************************************
 // マネージャクラス
@@ -63,6 +65,8 @@ public:
 	static CCamera *GetCamera(void) { return m_pCamera; }
 	static CTextureLoad *GetTextureLoad(void) { return m_pTextureLoad; }
 	static CPause *GetPause(void) { return m_pPause; }
+	static CCamera3D *GetCamera3D(void) { return m_pCamera3D; }
+	static CLight *GetLight(void) { return m_pLight; }
 
 #ifdef _DEBUG
 	static CDebug *GetDebugger(void) { return m_pDebug; }
@@ -88,6 +92,8 @@ private:
 	static CCamera *m_pCamera;
 	static CTextureLoad *m_pTextureLoad;
 	static CPause *m_pPause;
+	static CCamera3D *m_pCamera3D;
+	static CLight *m_pLight;
 
 #ifdef _DEBUG
 	static CDebug *m_pDebug;

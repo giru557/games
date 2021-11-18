@@ -23,7 +23,7 @@ class CEnemy;
 //*****************************************************************************
 #define PLAYER_WIDTH (75.0f)
 #define PLAYER_HEIGHT (75.0f)
-#define PLAYER_DASH_FRAMES (30)
+#define PLAYER_DASH_FRAMES (50)
 #define PLAYER_DRAW_PRIORITY (3)
 #define PLAYER_SMOKE_FREQ (60)
 
@@ -63,12 +63,21 @@ public:
 	void Shoot(int nType);
 	void AddForce(D3DXVECTOR3 vec, float fValue);
 	bool GetDashState(void) { return m_bDash; }
+	D3DXVECTOR3 GetMove(void) { return m_move; }
 	void CollideEnemy(CEnemy *pEnemy);
 
 	static CPlayer *Create(D3DXVECTOR3 pos);
 	static CPlayer *Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXVECTOR2 size);
 
 private:
+	void StateManage(void);			// 状態、フラグ管理
+	void Dash(void);				// ダッシュ
+	void Move(void);				// プレイヤーの移動
+	void SmoothTurn(void);			// 回転を滑らかにする関数
+	void FullAuto(void);			// 連射用の関数
+	void FullAuto4(void);			// 4方向射撃連射用
+	void Trail(void);				// 軌跡を作る
+
 	D3DXVECTOR3 m_move;		// プレイヤーの移動値
 	D3DXVECTOR3 m_rotDest;	// プレイヤーの回転目標値
 	bool m_bPowered;		// 推進力が与えられているか
@@ -80,14 +89,6 @@ private:
 	int m_nShootSpeed4;		// 4方向射撃スピード
 	int m_nShootCounter4;	// 4方向射撃カウンター
 	float m_fSpeedDecay;	// 速度減衰値
-
-	void StateManage(void);			// 状態、フラグ管理
-	void Dash(void);				// ダッシュ
-	void Move(void);				// プレイヤーの移動
-	void SmoothTurn(void);			// 回転を滑らかにする関数
-	void FullAuto(void);			// 連射用の関数
-	void FullAuto4(void);			// 4方向射撃連射用
-	void Trail(void);				// 軌跡を作る
 };
 
 #endif

@@ -21,6 +21,7 @@ CSound::SOUNDPARAM CSound::m_aParam[SOUND_LABEL_MAX] =
 	{ "resource/sound/se/impact000.wav", 0 },
 	{ "resource/sound/se/forcefield.wav", 0 },
 	{ "resource/sound/se/beam.wav", 0 },
+	{ "resource/sound/se/orb.wav", 0},
 	{ "resource/sound/bgm/title.wav", -1 },
 	{ "resource/sound/bgm/ingame.wav", -1 },
 	{ "resource/sound/bgm/gameover.wav", -1 },

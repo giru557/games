@@ -11,6 +11,7 @@
 #include "player.h"
 #include "particle.h"
 #include "energy.h"
+#include "sound.h"
 
 //*****************************************************************************
 // オーブクラス ( 継承元: 2Dオブジェクトクラス [scene2d] )
@@ -160,6 +161,7 @@ COrb *COrb::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXVECTOR2 size, int nCrea
 void COrb::Apply(void)
 {
 	CGame::GetEnergy()->AddEnergy(ORB_ENERGY_GAIN);	// エネルギーを回復
+	CManager::GetSound()->Play(CSound::SOUND_LABEL_SE_ORB);	// 音声
 
 	CParticle::Create(	// パーティクル
 		CGame::GetPlayer()->GetPos(),

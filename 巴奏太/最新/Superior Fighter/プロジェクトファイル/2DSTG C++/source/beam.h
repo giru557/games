@@ -25,6 +25,12 @@
 class CBeam : public CScene
 {
 public:
+	typedef enum {	// ÉrÅ[ÉÄÇÃèÛë‘
+		BEAMSTATE_NONE = 0,
+		BEAMSTATE_START,
+		BEAMSTATE_END,
+	} BEAMSTATE;
+
 	CBeam();
 	~CBeam();
 
@@ -33,13 +39,14 @@ public:
 	void Update(void);
 	void Draw(void);
 
-	void SetPos(D3DXVECTOR3 pos) { }
-	void SetRot(D3DXVECTOR3 rot) {};
+	void SetPos(D3DXVECTOR3 pos) {}
+	void SetRot(D3DXVECTOR3 rot) { m_rot = rot; };
 	void SetSize(D3DXVECTOR2 size) {};
 	D3DXVECTOR3 GetPos(void) { return VECTOR3_ZERO; }
-	D3DXVECTOR3 GetRot(void) { return VECTOR3_ZERO; }
+	D3DXVECTOR3 GetRot(void) { return m_rot; }
 	D3DXVECTOR2 GetSize(void) { return (D3DXVECTOR2)VECTOR3_ZERO; }
 
+	void SetBeamState(BEAMSTATE state) { m_beamState = state; }
 	void HitPlayer(bool bHit) { m_bHitPlayer = bHit; }
 	bool GetHitPlayer(void) { return m_bHitPlayer; }
 
@@ -49,9 +56,13 @@ private:
 	void Cooltime(void);
 
 	CScene2D *m_apScene[BEAM_OBJUSAGE];
+	BEAMSTATE m_beamState;
 	D3DXVECTOR3 m_pos;
+	D3DXVECTOR3 m_rot;
 	D3DXVECTOR2 m_sizeV;
 	D3DXVECTOR2 m_sizeH;
+	float m_fBeamSizeMul;
+	float m_fBeamColMul;
 	int m_nActiveFrames;
 	int m_nDamageCooltime;
 	bool m_bHitPlayer;

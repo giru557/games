@@ -22,8 +22,8 @@
 #define WAVE_NEXT_WAITFRAMES (180)	// 次のウェーブに行くまでの待機時間
 #define WAVE_LAST_WAITFRAMES (240)	// クリア後にリザルト画面に行くまでの待機時間
 
-#define WAVE_1_ENEMIES (50)		// ウェーブ1の敵の数
-#define WAVE_2_ENEMIES (75)		// ウェーブ2
+#define WAVE_1_ENEMIES (40)		// ウェーブ1の敵の数
+#define WAVE_2_ENEMIES (80)		// ウェーブ2
 #define WAVE_3_ENEMIES (25)		// ウェーブ3
 #define WAVE_BOSS_ENEMIES (5)	// ボスの数
 

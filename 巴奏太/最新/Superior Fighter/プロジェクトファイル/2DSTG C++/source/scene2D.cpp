@@ -136,16 +136,18 @@ void CScene2D::UpdateVertex(void)
 	m_fAngle = atan2f(-m_size.x, m_size.y);
 
 	// 頂点バッファをロックしてポインタ取得
-	m_pVtxBuff->Lock(0, 0, (void**)&m_pVertex, 0);
+	if (m_pVtxBuff != NULL) {
+		m_pVtxBuff->Lock(0, 0, (void**)&m_pVertex, 0);
 
-	// 頂点位置
-	m_pVertex[0].pos = D3DXVECTOR3(m_pos.x + sinf(m_fAngle + m_rot.z) * m_fLength / 2, m_pos.y + cosf(m_fAngle + m_rot.z) * m_fLength / 2, 0);
-	m_pVertex[1].pos = D3DXVECTOR3(m_pos.x + sinf((-m_fAngle + D3DX_PI) + m_rot.z) * m_fLength / 2, m_pos.y + cosf((-m_fAngle + D3DX_PI) + m_rot.z) * m_fLength / 2, 0);
-	m_pVertex[2].pos = D3DXVECTOR3(m_pos.x + sinf(-m_fAngle + m_rot.z) * m_fLength / 2, m_pos.y + cosf(-m_fAngle + m_rot.z) * m_fLength / 2, 0);
-	m_pVertex[3].pos = D3DXVECTOR3(m_pos.x + sinf(m_fAngle + D3DX_PI + m_rot.z) * m_fLength / 2, m_pos.y + cosf(m_fAngle + D3DX_PI + m_rot.z) * m_fLength / 2, 0);
+		// 頂点位置
+		m_pVertex[0].pos = D3DXVECTOR3(m_pos.x + sinf(m_fAngle + m_rot.z) * m_fLength / 2, m_pos.y + cosf(m_fAngle + m_rot.z) * m_fLength / 2, 0);
+		m_pVertex[1].pos = D3DXVECTOR3(m_pos.x + sinf((-m_fAngle + D3DX_PI) + m_rot.z) * m_fLength / 2, m_pos.y + cosf((-m_fAngle + D3DX_PI) + m_rot.z) * m_fLength / 2, 0);
+		m_pVertex[2].pos = D3DXVECTOR3(m_pos.x + sinf(-m_fAngle + m_rot.z) * m_fLength / 2, m_pos.y + cosf(-m_fAngle + m_rot.z) * m_fLength / 2, 0);
+		m_pVertex[3].pos = D3DXVECTOR3(m_pos.x + sinf(m_fAngle + D3DX_PI + m_rot.z) * m_fLength / 2, m_pos.y + cosf(m_fAngle + D3DX_PI + m_rot.z) * m_fLength / 2, 0);
 
-	// 頂点バッファアンロック
-	m_pVtxBuff->Unlock();
+		// 頂点バッファアンロック
+		m_pVtxBuff->Unlock();
+	}
 }
 
 //=============================================================================
