@@ -34,7 +34,7 @@ public:
 		EFFECT_TEX_MAX,
 	} EFFECT_TEX;
 
-	CEffect();
+	CEffect(int nPriority = EFFECT_DRAW_PRIORITY);
 	~CEffect();
 
 	HRESULT Init(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXVECTOR2 size);
@@ -52,9 +52,9 @@ private:
 	D3DXVECTOR3 m_move;
 	D3DBLEND m_blendSrc;
 	D3DBLEND m_blendDst;
-	float m_fAlpha;			// アルファ値係数
-	float m_fShrink;		// 縮小用係数
-	float m_fShrinkSpeed;	// 縮小スピード
+	float m_fAlpha;				// アルファ値係数
+	float m_fShrink;			// 縮小用係数
+	float m_fShrinkSpeed;		// 縮小スピード
 	float m_fTransparentSpeed;	// 透明化スピード
 };
 

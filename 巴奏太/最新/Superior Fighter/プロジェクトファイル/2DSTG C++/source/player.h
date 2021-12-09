@@ -52,7 +52,7 @@ class CEnemy;
 class CPlayer : public CScene2D
 {
 public:
-	CPlayer(int nPriority = 4);
+	CPlayer(int nPriority = PLAYER_DRAW_PRIORITY);
 	~CPlayer();
 
 	HRESULT Init(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXVECTOR2 size);

@@ -17,11 +17,7 @@
 #include "beam.h"
 
 //*****************************************************************************
-// 静的メンバ変数
-//*****************************************************************************
-
-//*****************************************************************************
-// 当たり判定クラス ( 派生元: オブジェクトクラス (scene) )
+// 当たり判定クラス
 //*****************************************************************************
 
 //=============================================================================
@@ -43,10 +39,9 @@ CCollision::~CCollision()
 //=============================================================================
 // 初期化処理
 //=============================================================================
-HRESULT CCollision::Init(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXVECTOR2 size)
+void CCollision::Init()
 {
-	this->SetPriority(0);
-	return S_OK;
+
 }
 
 //=============================================================================
@@ -54,8 +49,7 @@ HRESULT CCollision::Init(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXVECTOR2 size)
 //=============================================================================
 void CCollision::Uninit(void)
 {
-	// 開放処理 (sceneのポインタ配列から削除）
-	Release();
+
 }
 
 //=============================================================================
@@ -74,29 +68,29 @@ void CCollision::Update(void)
 
 	// すべてのオブジェクトを検索して対応するコンテナに入れる
 	for (int nCntPriority = 0; nCntPriority < SCENE_PRIORITY_MAX; nCntPriority++) {
-		auto *vectorScene = GetSceneList(nCntPriority);
+		auto *vectorScene = CScene::GetSceneList(nCntPriority);
 		for (int nCntScene = 0; nCntScene < (signed)vectorScene->size(); nCntScene++) {
 
 			// 種類判定
-			if ((*vectorScene)[nCntScene]->GetObjType() == OBJTYPE_ENEMY) {
+			if ((*vectorScene)[nCntScene]->GetObjType() == CScene::OBJTYPE_ENEMY) {
 				m_vecEnemy.push_back((*vectorScene)[nCntScene]);
 			}
-			else if ((*vectorScene)[nCntScene]->GetObjType() == OBJTYPE_BULLET) {
+			else if ((*vectorScene)[nCntScene]->GetObjType() == CScene::OBJTYPE_BULLET) {
 				m_vecBullet.push_back((*vectorScene)[nCntScene]);
 			}
-			else if ((*vectorScene)[nCntScene]->GetObjType() == OBJTYPE_BEAM) {
+			else if ((*vectorScene)[nCntScene]->GetObjType() == CScene::OBJTYPE_BEAM) {
 				m_vecBeam.push_back((*vectorScene)[nCntScene]);
 			}
-			else if ((*vectorScene)[nCntScene]->GetObjType() == OBJTYPE_BEAMBASE) {
+			else if ((*vectorScene)[nCntScene]->GetObjType() == CScene::OBJTYPE_BEAMBASE) {
 				m_vecBeamBase.push_back((*vectorScene)[nCntScene]);
 			}
-			else if ((*vectorScene)[nCntScene]->GetObjType() == OBJTYPE_BOSS) {
+			else if ((*vectorScene)[nCntScene]->GetObjType() == CScene::OBJTYPE_BOSS) {
 				m_vecBoss.push_back((*vectorScene)[nCntScene]);
 			}
-			else if ((*vectorScene)[nCntScene]->GetObjType() == OBJTYPE_BOSSCORE) {
+			else if ((*vectorScene)[nCntScene]->GetObjType() == CScene::OBJTYPE_BOSSCORE) {
 				m_vecBossCore.push_back((*vectorScene)[nCntScene]);
 			}
-			else if ((*vectorScene)[nCntScene]->GetObjType() == OBJTYPE_DEBRIS) {
+			else if ((*vectorScene)[nCntScene]->GetObjType() == CScene::OBJTYPE_DEBRIS) {
 				m_vecDebris.push_back((*vectorScene)[nCntScene]);
 			}
 
@@ -115,30 +109,6 @@ void CCollision::Update(void)
 
 	// ビームの当たり判定
 	CollideBeam();
-}
-
-//=============================================================================
-// 描画処理
-//=============================================================================
-void CCollision::Draw(void)
-{
-
-}
-
-//=============================================================================
-// 生成関数
-//=============================================================================
-CCollision *CCollision::Create(void)
-{
-	// 生成、初期化
-	CCollision *pCollision;
-	pCollision = new CCollision;
-	if (pCollision != NULL)
-	{
-		pCollision->Init(VECTOR3_ZERO, VECTOR3_ZERO, (D3DXVECTOR2)VECTOR3_ZERO);
-	}
-
-	return pCollision;
 }
 
 //=============================================================================
@@ -198,8 +168,8 @@ void CCollision::CollideBullet(void)
 		CBullet *pBullet = dynamic_cast<CBullet*>(m_vecBullet[nCntBullet]);
 
 		// 弾の所有者が敵の場合
-		if (pBullet->GetOwner() == OBJTYPE_ENEMY ||
-			pBullet->GetOwner() == OBJTYPE_BOSS) {
+		if (pBullet->GetOwner() == CScene::OBJTYPE_ENEMY ||
+			pBullet->GetOwner() == CScene::OBJTYPE_BOSS) {
 
 			// プレイヤーとの判定
 			CPlayer *pPlayer = CGame::GetPlayer();
@@ -209,7 +179,7 @@ void CCollision::CollideBullet(void)
 
 		}
 		// 弾の所有者がプレイヤーの場合
-		else if (pBullet->GetOwner() == OBJTYPE_PLAYER) {
+		else if (pBullet->GetOwner() == CScene::OBJTYPE_PLAYER) {
 
 			// 敵との判定
 			for (int nCntEnemy = 0; nCntEnemy < (signed)m_vecEnemy.size(); nCntEnemy++) {

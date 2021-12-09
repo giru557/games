@@ -33,10 +33,15 @@ public:
 	static void SetCameraCenter(D3DXVECTOR3 centerPos);				// カメラの位置を設定
 	static D3DXVECTOR3 GetCameraCenter(void) { return m_pos; }		// カメラ位置を取得
 private:
-	bool m_bShaking;		// カメラの揺れフラグ
-	int m_nShakeFrame;		// 揺れ時間
-	int m_nFrameCounter;	// フレームカウント用
-	float m_fMagnitude;		// 揺れの強さ
+	// 揺れのパラメーター
+	typedef struct {
+		bool bActive;		// カメラの揺れフラグ
+		int nFrames;		// 揺れ時間
+		int nCounter;		// フレームカウント用
+		float fMagnitude;	// 揺れの強さ
+	} SHAKE_PARAM;
+
+	SHAKE_PARAM m_shake;			// 揺れのパラメーター
 
 	static D3DXVECTOR3 m_pos;		// カメラ位置
 	static D3DXVECTOR3 m_posDest;	// カメラの目標位置

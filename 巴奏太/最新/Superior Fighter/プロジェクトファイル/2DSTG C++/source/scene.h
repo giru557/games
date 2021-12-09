@@ -51,16 +51,16 @@ public:
 	virtual void Draw(void) = 0;
 
 	// SET
-	virtual void SetPos(D3DXVECTOR3 pos) = 0;
-	virtual void SetRot(D3DXVECTOR3 rot) = 0;
-	virtual void SetSize(D3DXVECTOR2 size) = 0;
+	virtual void SetPos(D3DXVECTOR3 pos) {};
+	virtual void SetRot(D3DXVECTOR3 rot) {};
+	virtual void SetSize(D3DXVECTOR2 size) {};
 	void SetObjType(OBJTYPE type);
 	void SetPriority(int nPriority);
 
 	// GET
-	virtual D3DXVECTOR3 GetPos(void) = 0;
-	virtual D3DXVECTOR3 GetRot(void) = 0;
-	virtual D3DXVECTOR2 GetSize(void) = 0;
+	virtual D3DXVECTOR3 GetPos(void) { return VECTOR3_ZERO; }
+	virtual D3DXVECTOR3 GetRot(void) { return VECTOR3_ZERO; }
+	virtual D3DXVECTOR2 GetSize(void) { return D3DXVECTOR2(0, 0); }
 	OBJTYPE GetObjType(void);
 	int GetPriority(void) { return m_nPriority; }
 
@@ -77,7 +77,6 @@ private:
 	OBJTYPE m_objType;						// オブジェクトの種類
 
 	static vector<CScene*> m_aSceneVc[SCENE_PRIORITY_MAX];	// シーンのリスト
-	static int m_nNumAll;									// 全体の生成数
 };
 
 #endif

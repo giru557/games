@@ -151,16 +151,21 @@ void CBossCore::SetBeamAttack(void)
 //=============================================================================
 void CBossCore::BeamAttack(void)
 {
+	// ƒJƒEƒ“ƒg
 	static int nFrameCount;
 	if (m_bBeamAttack) {
 		nFrameCount++;
 
 		if (nFrameCount <= BOSS_CORE_BEAMATTACK_CHARGETIME) {
+			// —\”õ“®ì
 			PreAttack();
+			
 		}
 		else if (nFrameCount > BOSS_CORE_BEAMATTACK_CHARGETIME) {
+			// ”­“®
 			m_pBeam = CBeam::Create(this->GetPos(), this->GetRot(), BOSS_CORE_BEAMATTACK_SIZE, BOSS_CORE_BEAMATTACK_ACTIVETIME);
 			CManager::GetSound()->Play(CSound::SOUND_LABEL_SE_BEAM);
+			CManager::GetRenderer()->SetFeedbackEffect(BOSS_CORE_BEAMATTACK_ACTIVETIME, 0.6f, -20.0f);
 
 			m_bBeamAttack = false;
 			nFrameCount = 0;

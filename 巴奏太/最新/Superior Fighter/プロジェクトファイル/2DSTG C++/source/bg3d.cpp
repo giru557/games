@@ -297,9 +297,13 @@ void CBackground3D::Update(void)
 		m_pVertex[nCnt].pos.y = cosf(-distToVtx * m_ripple.fFrequency + nCntFrame * m_ripple.fSpeed) * m_ripple.fAmplitude;
 
 		// テクスチャ座標をプレイヤーの移動値に合わせてずらす
-		D3DXVECTOR3 playerMove = CGame::GetPlayer()->GetMove();
-		m_pVertex[nCnt].tex += D3DXVECTOR2(playerMove.x, playerMove.y) * 0.0002f;
-		m_pVertex[nCnt].tex2 += D3DXVECTOR2(playerMove.x, playerMove.y) * 0.0004f;
+		CPlayer *pPlayer = CGame::GetPlayer();
+		if (pPlayer != NULL) {
+			D3DXVECTOR3 playerMove = pPlayer->GetMove();
+			m_pVertex[nCnt].tex += D3DXVECTOR2(playerMove.x, playerMove.y) * 0.0002f;
+			m_pVertex[nCnt].tex2 += D3DXVECTOR2(playerMove.x, playerMove.y) * 0.0004f;
+		}
+
 	}
 
 	// 頂点バッファアンロック

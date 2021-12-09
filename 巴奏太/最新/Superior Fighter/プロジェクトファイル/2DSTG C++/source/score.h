@@ -18,6 +18,7 @@
 //*****************************************************************************
 #define SCORE_DIGIT (8)	// スコアの桁数
 #define SCORE_POSITION (D3DXVECTOR3(1500.0f, 80.0f, 0.0f))
+
 //*****************************************************************************
 // 前方宣言
 //*****************************************************************************
@@ -37,17 +38,8 @@ public:
 	void Update(void);
 	void Draw(void);
 
-	// Set
-	void SetPos(D3DXVECTOR3 pos);
-	void SetRot(D3DXVECTOR3 rot);
-	void SetSize(D3DXVECTOR2 size);
 	void SetScore(int nScore);
 	void AddScore(int nValue);
-
-	// Get
-	D3DXVECTOR3 GetPos(void);
-	D3DXVECTOR3 GetRot(void);
-	D3DXVECTOR2 GetSize(void);
 	int GetScore(void);
 
 	static CScore *Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXVECTOR2 size);

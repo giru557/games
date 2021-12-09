@@ -39,12 +39,9 @@ public:
 	void Update(void);
 	void Draw(void);
 
-	// Set
 	void SetPos(D3DXVECTOR3 pos) { m_pos = pos; }
 	void SetRot(D3DXVECTOR3 rot) { m_rot = rot; }
 	void SetSize(D3DXVECTOR2 size) { m_size = size; }
-
-	// Get
 	D3DXVECTOR3 GetPos(void) { return m_pos; }
 	D3DXVECTOR3 GetRot(void) { return m_rot; }
 	D3DXVECTOR2 GetSize(void) { return m_size; }

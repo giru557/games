@@ -13,142 +13,85 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="ソース ファイル\MAIN">
-      <UniqueIdentifier>{835e9209-b258-429d-83df-c3a6856cde5c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Management">
       <UniqueIdentifier>{1ec18512-2f0e-437d-a9e7-59f5452c83cc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Object">
-      <UniqueIdentifier>{8a9b2977-3cd7-4b8d-a49a-5130d46ce2bd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\MAIN">
-      <UniqueIdentifier>{da9f67c7-819f-460f-96df-de1c50677898}</UniqueIdentifier>
     </Filter>
     <Filter Include="ヘッダー ファイル\Management">
       <UniqueIdentifier>{75df0d99-7b52-4af1-b9fd-47b1ec9243ab}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル\Object">
+    <Filter Include="ソース ファイル\System">
+      <UniqueIdentifier>{ed9b8434-435e-4ed2-b8ca-d0fb2b541d0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\System">
+      <UniqueIdentifier>{3a7543b1-1655-4f2c-bf80-e278fcc345ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Object %28Scene%29">
       <UniqueIdentifier>{d5cfb05c-55e9-4980-b530-bbdcc06e2673}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Object %28Scene%29">
+      <UniqueIdentifier>{8a9b2977-3cd7-4b8d-a49a-5130d46ce2bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Object %28Scene%29\scene2D">
+      <UniqueIdentifier>{0f577633-beb5-4437-ac11-34327c74c934}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Object %28Scene%29\scene2D">
+      <UniqueIdentifier>{217407ad-e869-41ad-b7ed-2184fe7e81e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Object %28Scene%29\scene2D\enemy">
+      <UniqueIdentifier>{18800c0c-df02-407d-9fe4-8b24c6161567}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Object %28Scene%29\scene2D\enemy">
+      <UniqueIdentifier>{d4fedc8b-5801-4c9b-b39e-6c3f3b22cf7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Management\SceneManage">
+      <UniqueIdentifier>{5ba827f2-c644-4c70-841d-91584af9aa45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Management\Essential">
+      <UniqueIdentifier>{054ad57d-74f1-47cb-9446-cf347535968f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Management\Essential">
+      <UniqueIdentifier>{e4cf55fc-7588-4f23-b16d-da0b51df9895}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Management\SceneManage">
+      <UniqueIdentifier>{2dc51aee-6472-4cff-a0fa-10ff7d4bc9e1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="source\main.cpp">
-      <Filter>ソース ファイル\MAIN</Filter>
-    </ClCompile>
-    <ClCompile Include="source\manager.cpp">
-      <Filter>ソース ファイル\Management</Filter>
-    </ClCompile>
-    <ClCompile Include="source\camera.cpp">
-      <Filter>ソース ファイル\Management</Filter>
-    </ClCompile>
     <ClCompile Include="source\fade.cpp">
       <Filter>ソース ファイル\Management</Filter>
     </ClCompile>
-    <ClCompile Include="source\game.cpp">
-      <Filter>ソース ファイル\Management</Filter>
-    </ClCompile>
-    <ClCompile Include="source\input.cpp">
-      <Filter>ソース ファイル\Management</Filter>
-    </ClCompile>
-    <ClCompile Include="source\renderer.cpp">
-      <Filter>ソース ファイル\Management</Filter>
-    </ClCompile>
-    <ClCompile Include="source\sound.cpp">
-      <Filter>ソース ファイル\Management</Filter>
-    </ClCompile>
-    <ClCompile Include="source\scene.cpp">
-      <Filter>ソース ファイル\Management</Filter>
-    </ClCompile>
-    <ClCompile Include="source\result.cpp">
-      <Filter>ソース ファイル\Management</Filter>
-    </ClCompile>
     <ClCompile Include="source\score.cpp">
-      <Filter>ソース ファイル\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="source\scene2D.cpp">
-      <Filter>ソース ファイル\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="source\player.cpp">
-      <Filter>ソース ファイル\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="source\number.cpp">
-      <Filter>ソース ファイル\Object</Filter>
+      <Filter>ソース ファイル\Object %28Scene%29</Filter>
     </ClCompile>
     <ClCompile Include="source\life.cpp">
-      <Filter>ソース ファイル\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="source\enemy.cpp">
-      <Filter>ソース ファイル\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="source\bullet.cpp">
-      <Filter>ソース ファイル\Object</Filter>
+      <Filter>ソース ファイル\Object %28Scene%29</Filter>
     </ClCompile>
     <ClCompile Include="source\bg.cpp">
-      <Filter>ソース ファイル\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="source\title.cpp">
-      <Filter>ソース ファイル\Management</Filter>
-    </ClCompile>
-    <ClCompile Include="source\enemy_charger.cpp">
-      <Filter>ソース ファイル\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="source\enemy_gunner.cpp">
-      <Filter>ソース ファイル\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="source\spritesheet.cpp">
-      <Filter>ソース ファイル\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="source\effect.cpp">
-      <Filter>ソース ファイル\Object</Filter>
+      <Filter>ソース ファイル\Object %28Scene%29</Filter>
     </ClCompile>
     <ClCompile Include="source\crosshair.cpp">
-      <Filter>ソース ファイル\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="source\textureloader.cpp">
-      <Filter>ソース ファイル\Management</Filter>
-    </ClCompile>
-    <ClCompile Include="source\debugger.cpp">
-      <Filter>ソース ファイル\Management</Filter>
-    </ClCompile>
-    <ClCompile Include="source\wave.cpp">
-      <Filter>ソース ファイル\Object</Filter>
+      <Filter>ソース ファイル\Object %28Scene%29</Filter>
     </ClCompile>
     <ClCompile Include="source\help.cpp">
-      <Filter>ソース ファイル\Object</Filter>
+      <Filter>ソース ファイル\Object %28Scene%29</Filter>
     </ClCompile>
     <ClCompile Include="source\minimap.cpp">
-      <Filter>ソース ファイル\Object</Filter>
+      <Filter>ソース ファイル\Object %28Scene%29</Filter>
     </ClCompile>
     <ClCompile Include="source\particle.cpp">
-      <Filter>ソース ファイル\Object</Filter>
+      <Filter>ソース ファイル\Object %28Scene%29</Filter>
     </ClCompile>
     <ClCompile Include="source\pause.cpp">
       <Filter>ソース ファイル\Management</Filter>
     </ClCompile>
     <ClCompile Include="source\energy.cpp">
-      <Filter>ソース ファイル\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="source\orb.cpp">
-      <Filter>ソース ファイル\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="source\boss_turret.cpp">
-      <Filter>ソース ファイル\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="source\boss_core.cpp">
-      <Filter>ソース ファイル\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="source\boss_manager.cpp">
-      <Filter>ソース ファイル\Object</Filter>
+      <Filter>ソース ファイル\Object %28Scene%29</Filter>
     </ClCompile>
     <ClCompile Include="source\collision.cpp">
       <Filter>ソース ファイル\Management</Filter>
     </ClCompile>
     <ClCompile Include="source\beam.cpp">
-      <Filter>ソース ファイル\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="source\debris.cpp">
-      <Filter>ソース ファイル\Object</Filter>
+      <Filter>ソース ファイル\Object %28Scene%29</Filter>
     </ClCompile>
     <ClCompile Include="source\light.cpp">
       <Filter>ソース ファイル\Management</Filter>
@@ -157,126 +100,126 @@
       <Filter>ソース ファイル\Management</Filter>
     </ClCompile>
     <ClCompile Include="source\bg3d.cpp">
-      <Filter>ソース ファイル\Object</Filter>
+      <Filter>ソース ファイル\Object %28Scene%29</Filter>
+    </ClCompile>
+    <ClCompile Include="source\wave.cpp">
+      <Filter>ソース ファイル\Management</Filter>
+    </ClCompile>
+    <ClCompile Include="source\sound.cpp">
+      <Filter>ソース ファイル\System</Filter>
+    </ClCompile>
+    <ClCompile Include="source\input.cpp">
+      <Filter>ソース ファイル\System</Filter>
+    </ClCompile>
+    <ClCompile Include="source\debugger.cpp">
+      <Filter>ソース ファイル\System</Filter>
+    </ClCompile>
+    <ClCompile Include="source\main.cpp">
+      <Filter>ソース ファイル\System</Filter>
+    </ClCompile>
+    <ClCompile Include="source\bullet.cpp">
+      <Filter>ソース ファイル\Object %28Scene%29\scene2D</Filter>
+    </ClCompile>
+    <ClCompile Include="source\debris.cpp">
+      <Filter>ソース ファイル\Object %28Scene%29\scene2D</Filter>
+    </ClCompile>
+    <ClCompile Include="source\effect.cpp">
+      <Filter>ソース ファイル\Object %28Scene%29\scene2D</Filter>
+    </ClCompile>
+    <ClCompile Include="source\orb.cpp">
+      <Filter>ソース ファイル\Object %28Scene%29\scene2D</Filter>
+    </ClCompile>
+    <ClCompile Include="source\spritesheet.cpp">
+      <Filter>ソース ファイル\Object %28Scene%29\scene2D</Filter>
+    </ClCompile>
+    <ClCompile Include="source\player.cpp">
+      <Filter>ソース ファイル\Object %28Scene%29\scene2D</Filter>
+    </ClCompile>
+    <ClCompile Include="source\enemy.cpp">
+      <Filter>ソース ファイル\Object %28Scene%29\scene2D\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="source\boss_core.cpp">
+      <Filter>ソース ファイル\Object %28Scene%29\scene2D\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="source\boss_turret.cpp">
+      <Filter>ソース ファイル\Object %28Scene%29\scene2D\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="source\enemy_charger.cpp">
+      <Filter>ソース ファイル\Object %28Scene%29\scene2D\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="source\enemy_gunner.cpp">
+      <Filter>ソース ファイル\Object %28Scene%29\scene2D\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="source\number.cpp">
+      <Filter>ソース ファイル\Management</Filter>
+    </ClCompile>
+    <ClCompile Include="source\scene2D.cpp">
+      <Filter>ソース ファイル\Object %28Scene%29\scene2D</Filter>
+    </ClCompile>
+    <ClCompile Include="source\game.cpp">
+      <Filter>ソース ファイル\Management\SceneManage</Filter>
+    </ClCompile>
+    <ClCompile Include="source\result.cpp">
+      <Filter>ソース ファイル\Management\SceneManage</Filter>
+    </ClCompile>
+    <ClCompile Include="source\title.cpp">
+      <Filter>ソース ファイル\Management\SceneManage</Filter>
+    </ClCompile>
+    <ClCompile Include="source\camera.cpp">
+      <Filter>ソース ファイル\Management\Essential</Filter>
+    </ClCompile>
+    <ClCompile Include="source\manager.cpp">
+      <Filter>ソース ファイル\Management\Essential</Filter>
+    </ClCompile>
+    <ClCompile Include="source\renderer.cpp">
+      <Filter>ソース ファイル\Management\Essential</Filter>
+    </ClCompile>
+    <ClCompile Include="source\scene.cpp">
+      <Filter>ソース ファイル\Management\Essential</Filter>
+    </ClCompile>
+    <ClCompile Include="source\textureloader.cpp">
+      <Filter>ソース ファイル\Management\Essential</Filter>
+    </ClCompile>
+    <ClCompile Include="source\boss_manager.cpp">
+      <Filter>ソース ファイル\Object %28Scene%29\scene2D\enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="source\main.h">
-      <Filter>ヘッダー ファイル\MAIN</Filter>
-    </ClInclude>
     <ClInclude Include="source\bg.h">
-      <Filter>ヘッダー ファイル\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="source\bullet.h">
-      <Filter>ヘッダー ファイル\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="source\camera.h">
-      <Filter>ヘッダー ファイル\Management</Filter>
-    </ClInclude>
-    <ClInclude Include="source\enemy.h">
-      <Filter>ヘッダー ファイル\Object</Filter>
+      <Filter>ヘッダー ファイル\Object %28Scene%29</Filter>
     </ClInclude>
     <ClInclude Include="source\fade.h">
       <Filter>ヘッダー ファイル\Management</Filter>
     </ClInclude>
-    <ClInclude Include="source\game.h">
-      <Filter>ヘッダー ファイル\Management</Filter>
-    </ClInclude>
-    <ClInclude Include="source\input.h">
-      <Filter>ヘッダー ファイル\Management</Filter>
-    </ClInclude>
     <ClInclude Include="source\life.h">
-      <Filter>ヘッダー ファイル\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="source\manager.h">
-      <Filter>ヘッダー ファイル\Management</Filter>
-    </ClInclude>
-    <ClInclude Include="source\number.h">
-      <Filter>ヘッダー ファイル\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="source\player.h">
-      <Filter>ヘッダー ファイル\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="source\renderer.h">
-      <Filter>ヘッダー ファイル\Management</Filter>
-    </ClInclude>
-    <ClInclude Include="source\result.h">
-      <Filter>ヘッダー ファイル\Management</Filter>
-    </ClInclude>
-    <ClInclude Include="source\scene.h">
-      <Filter>ヘッダー ファイル\Management</Filter>
-    </ClInclude>
-    <ClInclude Include="source\scene2D.h">
-      <Filter>ヘッダー ファイル\Object</Filter>
+      <Filter>ヘッダー ファイル\Object %28Scene%29</Filter>
     </ClInclude>
     <ClInclude Include="source\score.h">
-      <Filter>ヘッダー ファイル\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="source\sound.h">
-      <Filter>ヘッダー ファイル\Management</Filter>
-    </ClInclude>
-    <ClInclude Include="source\title.h">
-      <Filter>ヘッダー ファイル\Management</Filter>
-    </ClInclude>
-    <ClInclude Include="source\enemy_charger.h">
-      <Filter>ヘッダー ファイル\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="source\enemy_gunner.h">
-      <Filter>ヘッダー ファイル\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="source\spritesheet.h">
-      <Filter>ヘッダー ファイル\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="source\effect.h">
-      <Filter>ヘッダー ファイル\Object</Filter>
+      <Filter>ヘッダー ファイル\Object %28Scene%29</Filter>
     </ClInclude>
     <ClInclude Include="source\crosshair.h">
-      <Filter>ヘッダー ファイル\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="source\textureloader.h">
-      <Filter>ヘッダー ファイル\Management</Filter>
-    </ClInclude>
-    <ClInclude Include="source\debugger.h">
-      <Filter>ヘッダー ファイル\Management</Filter>
-    </ClInclude>
-    <ClInclude Include="source\wave.h">
-      <Filter>ヘッダー ファイル\Object</Filter>
+      <Filter>ヘッダー ファイル\Object %28Scene%29</Filter>
     </ClInclude>
     <ClInclude Include="source\help.h">
-      <Filter>ヘッダー ファイル\Object</Filter>
+      <Filter>ヘッダー ファイル\Object %28Scene%29</Filter>
     </ClInclude>
     <ClInclude Include="source\minimap.h">
-      <Filter>ヘッダー ファイル\Object</Filter>
+      <Filter>ヘッダー ファイル\Object %28Scene%29</Filter>
     </ClInclude>
     <ClInclude Include="source\particle.h">
-      <Filter>ヘッダー ファイル\Object</Filter>
+      <Filter>ヘッダー ファイル\Object %28Scene%29</Filter>
     </ClInclude>
     <ClInclude Include="source\pause.h">
       <Filter>ヘッダー ファイル\Management</Filter>
     </ClInclude>
     <ClInclude Include="source\energy.h">
-      <Filter>ヘッダー ファイル\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="source\orb.h">
-      <Filter>ヘッダー ファイル\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="source\boss_turret.h">
-      <Filter>ヘッダー ファイル\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="source\boss_core.h">
-      <Filter>ヘッダー ファイル\Object</Filter>
+      <Filter>ヘッダー ファイル\Object %28Scene%29</Filter>
     </ClInclude>
     <ClInclude Include="source\boss_manager.h">
-      <Filter>ヘッダー ファイル\Object</Filter>
+      <Filter>ヘッダー ファイル\Object %28Scene%29</Filter>
     </ClInclude>
     <ClInclude Include="source\collision.h">
       <Filter>ヘッダー ファイル\Management</Filter>
-    </ClInclude>
-    <ClInclude Include="source\beam.h">
-      <Filter>ヘッダー ファイル\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="source\debris.h">
-      <Filter>ヘッダー ファイル\Object</Filter>
     </ClInclude>
     <ClInclude Include="source\light.h">
       <Filter>ヘッダー ファイル\Management</Filter>
@@ -285,7 +228,88 @@
       <Filter>ヘッダー ファイル\Management</Filter>
     </ClInclude>
     <ClInclude Include="source\bg3d.h">
-      <Filter>ヘッダー ファイル\Object</Filter>
+      <Filter>ヘッダー ファイル\Object %28Scene%29</Filter>
+    </ClInclude>
+    <ClInclude Include="source\wave.h">
+      <Filter>ヘッダー ファイル\Management</Filter>
+    </ClInclude>
+    <ClInclude Include="source\main.h">
+      <Filter>ヘッダー ファイル\System</Filter>
+    </ClInclude>
+    <ClInclude Include="source\sound.h">
+      <Filter>ヘッダー ファイル\System</Filter>
+    </ClInclude>
+    <ClInclude Include="source\input.h">
+      <Filter>ヘッダー ファイル\System</Filter>
+    </ClInclude>
+    <ClInclude Include="source\debugger.h">
+      <Filter>ヘッダー ファイル\System</Filter>
+    </ClInclude>
+    <ClInclude Include="source\beam.h">
+      <Filter>ヘッダー ファイル\Object %28Scene%29</Filter>
+    </ClInclude>
+    <ClInclude Include="source\bullet.h">
+      <Filter>ヘッダー ファイル\Object %28Scene%29\scene2D</Filter>
+    </ClInclude>
+    <ClInclude Include="source\debris.h">
+      <Filter>ヘッダー ファイル\Object %28Scene%29\scene2D</Filter>
+    </ClInclude>
+    <ClInclude Include="source\effect.h">
+      <Filter>ヘッダー ファイル\Object %28Scene%29\scene2D</Filter>
+    </ClInclude>
+    <ClInclude Include="source\orb.h">
+      <Filter>ヘッダー ファイル\Object %28Scene%29\scene2D</Filter>
+    </ClInclude>
+    <ClInclude Include="source\player.h">
+      <Filter>ヘッダー ファイル\Object %28Scene%29\scene2D</Filter>
+    </ClInclude>
+    <ClInclude Include="source\spritesheet.h">
+      <Filter>ヘッダー ファイル\Object %28Scene%29\scene2D</Filter>
+    </ClInclude>
+    <ClInclude Include="source\scene2D.h">
+      <Filter>ヘッダー ファイル\Object %28Scene%29\scene2D</Filter>
+    </ClInclude>
+    <ClInclude Include="source\enemy.h">
+      <Filter>ヘッダー ファイル\Object %28Scene%29\scene2D\enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="source\boss_turret.h">
+      <Filter>ヘッダー ファイル\Object %28Scene%29\scene2D\enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="source\boss_core.h">
+      <Filter>ヘッダー ファイル\Object %28Scene%29\scene2D\enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="source\enemy_charger.h">
+      <Filter>ヘッダー ファイル\Object %28Scene%29\scene2D\enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="source\enemy_gunner.h">
+      <Filter>ヘッダー ファイル\Object %28Scene%29\scene2D\enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="source\number.h">
+      <Filter>ヘッダー ファイル\Management</Filter>
+    </ClInclude>
+    <ClInclude Include="source\camera.h">
+      <Filter>ヘッダー ファイル\Management\Essential</Filter>
+    </ClInclude>
+    <ClInclude Include="source\manager.h">
+      <Filter>ヘッダー ファイル\Management\Essential</Filter>
+    </ClInclude>
+    <ClInclude Include="source\renderer.h">
+      <Filter>ヘッダー ファイル\Management\Essential</Filter>
+    </ClInclude>
+    <ClInclude Include="source\scene.h">
+      <Filter>ヘッダー ファイル\Management\Essential</Filter>
+    </ClInclude>
+    <ClInclude Include="source\game.h">
+      <Filter>ヘッダー ファイル\Management\SceneManage</Filter>
+    </ClInclude>
+    <ClInclude Include="source\title.h">
+      <Filter>ヘッダー ファイル\Management\SceneManage</Filter>
+    </ClInclude>
+    <ClInclude Include="source\result.h">
+      <Filter>ヘッダー ファイル\Management\SceneManage</Filter>
+    </ClInclude>
+    <ClInclude Include="source\textureloader.h">
+      <Filter>ヘッダー ファイル\Management\Essential</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

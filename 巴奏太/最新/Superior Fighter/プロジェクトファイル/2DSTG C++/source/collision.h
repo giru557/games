@@ -10,34 +10,26 @@
 //*****************************************************************************
 // ヘッダーのインクルード
 //*****************************************************************************
-#include "scene2d.h"
+#include "main.h"
+#include "scene2D.h"
 
 //*****************************************************************************
 // マクロ定義
 //*****************************************************************************
 
 //*****************************************************************************
-// 当たり判定クラス ( 派生元: オブジェクトクラス (scene) )
+// 当たり判定クラス
 //*****************************************************************************
-class CCollision : public CScene
+class CCollision
 {
 public:
 	CCollision();
 	~CCollision();
 
-	HRESULT Init(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXVECTOR2 size);
+	void Init();
 	void Uninit(void);
 	void Update(void);
-	void Draw(void);
 
-	void SetPos(D3DXVECTOR3 pos) { }
-	void SetRot(D3DXVECTOR3 rot) {};
-	void SetSize(D3DXVECTOR2 size) {};
-	D3DXVECTOR3 GetPos(void) { return VECTOR3_ZERO; }
-	D3DXVECTOR3 GetRot(void) { return VECTOR3_ZERO; }
-	D3DXVECTOR2 GetSize(void) { return (D3DXVECTOR2)VECTOR3_ZERO; }
-
-	static CCollision *Create(void);
 	static bool CollisionObject(CScene2D *pObjScene1, CScene2D *pObjScene2);
 	static bool CollisionObject(CScene2D *pObjScene1, CScene2D *pObjScene2, D3DXVECTOR2 size1, D3DXVECTOR2 size2);
 

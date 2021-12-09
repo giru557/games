@@ -16,6 +16,7 @@
 //*****************************************************************************
 // マクロ定義
 //*****************************************************************************
+#define DEBRIS_DRAWPRIORITY (2)
 
 //*****************************************************************************
 // 残骸クラス ( 継承元: 2Dポリゴン [scene2D] )
@@ -23,7 +24,7 @@
 class CDebris : public CScene2D
 {
 public:
-	CDebris();
+	CDebris(int nPriority = DEBRIS_DRAWPRIORITY);
 	~CDebris();
 
 	HRESULT Init(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXVECTOR2 size);

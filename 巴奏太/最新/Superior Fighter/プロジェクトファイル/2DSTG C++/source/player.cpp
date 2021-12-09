@@ -64,9 +64,6 @@ HRESULT CPlayer::Init(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXVECTOR2 size)
 	// テクスチャを設定
 	CScene2D::BindTexture(CManager::GetTextureLoad()->m_TextureMp["PLAYER"]);
 
-	// 優先度
-	SetPriority(PLAYER_DRAW_PRIORITY);
-
 	// オブジェクトの種類を設定
 	SetObjType(OBJTYPE_PLAYER);
 
@@ -374,6 +371,9 @@ void CPlayer::StateManage(void)
 			if (GetDashState() == false) {
 				if (CGame::GetEnergy()->UseEnergy(20)) {
 					m_bDash = true;
+
+					// ダッシュ時の効果
+					CManager::GetRenderer()->SetFeedbackEffect(PLAYER_DASH_FRAMES);
 					CGame::GetBG3D()->SetRippleFrequency(0.07f, PLAYER_DASH_FRAMES);
 					CGame::GetBG3D()->SetRippleAmplitude(25.0f, PLAYER_DASH_FRAMES);
 					CManager::GetSound()->Play(CSound::SOUND_LABEL_SE_DASH00);

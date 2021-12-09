@@ -47,6 +47,7 @@ public:
 	void Update(void);
 	void Draw(void);
 
+	// 位置向きサイズ
 	void SetPos(D3DXVECTOR3 pos) { m_pos = pos; }
 	void SetRot(D3DXVECTOR3 rot) { m_rot = rot; }
 	void SetSize(D3DXVECTOR2 size) { m_size = D3DXVECTOR2(size.x, size.y); }
@@ -54,10 +55,12 @@ public:
 	D3DXVECTOR3 GetRot(void) { return m_rot; }
 	D3DXVECTOR2 GetSize(void) { return m_size; }
 
+	// 波紋の設定
 	void SetRippleFrequency(float fValue, int nFrames) { m_ripple.fFrequency = fValue; m_ripple.nCountFreq = nFrames; }
 	void SetRippleSpeed(float fValue, int nFrames) { m_ripple.fSpeed = fValue; m_ripple.nCountSpd = nFrames; }
 	void SetRippleAmplitude(float fValue, int nFrames) { m_ripple.fAmplitude = fValue; m_ripple.nCountAmp = nFrames; }
 
+	// テクスチャ設定
 	void SetBossTexture(void) { m_bBossTex = true; }
 	void BindTexture(LPDIRECT3DTEXTURE9 pTexture1, LPDIRECT3DTEXTURE9 pTexture2, LPDIRECT3DTEXTURE9 pTexture3);
 

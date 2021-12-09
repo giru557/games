@@ -16,9 +16,6 @@
 //*****************************************************************************
 // マクロ定義
 //*****************************************************************************
-#define RESULT_TEXTURE_COUNT (2)
-#define RESULT_TEXTURE_0_FILEPATH ("resource\\texture\\gameclear.jpg")
-#define RESULT_TEXTURE_1_FILEPATH ("resource\\texture\\gameover.jpg")
 
 //*****************************************************************************
 // リザルト画面クラス ( 継承元: オブジェクトクラス [scene] )
@@ -34,15 +31,7 @@ public:
 	void Update(void);
 	void Draw(void);
 
-	void SetPos(D3DXVECTOR3 pos) {};
-	void SetRot(D3DXVECTOR3 rot) {};
-	void SetSize(D3DXVECTOR2 size) {};
-	D3DXVECTOR3 GetPos(void) { return VECTOR3_ZERO; }
-	D3DXVECTOR3 GetRot(void) { return VECTOR3_ZERO; }
-	D3DXVECTOR2 GetSize(void) { return (D3DXVECTOR2)VECTOR3_ZERO; }
-
 private:
-	static LPDIRECT3DTEXTURE9 m_apTexture[RESULT_TEXTURE_COUNT];
 	CScene2D *m_pScene2D;	// 背景用
 
 };

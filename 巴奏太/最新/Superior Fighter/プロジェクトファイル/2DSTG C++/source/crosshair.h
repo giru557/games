@@ -31,20 +31,9 @@ public:
 	void Update(void);
 	void Draw(void);
 
-	void SetPos(D3DXVECTOR3 pos) {};
-	void SetRot(D3DXVECTOR3 rot) {};
-	void SetSize(D3DXVECTOR2 size) {};
-	D3DXVECTOR3 GetPos(void) { return VECTOR3_ZERO; }
-	D3DXVECTOR3 GetRot(void) { return VECTOR3_ZERO; }
-	D3DXVECTOR2 GetSize(void) { return (D3DXVECTOR2)VECTOR3_ZERO; }
-
 	static CCrosshair *Create(void);
 
 private:
-	D3DXVECTOR3 m_pos;
-	D3DXVECTOR3 m_rot;
-	D3DXVECTOR2 m_size;
-
 	CScene2D *m_pScene2D;	// クロスヘア用の2Dオブジェクト
 };
 

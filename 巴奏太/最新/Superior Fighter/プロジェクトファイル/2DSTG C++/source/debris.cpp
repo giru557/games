@@ -16,7 +16,7 @@
 //=============================================================================
 // コンストラクタ
 //=============================================================================
-CDebris::CDebris()
+CDebris::CDebris(int nPriority) : CScene2D(nPriority)
 {
 
 }
@@ -44,7 +44,6 @@ HRESULT CDebris::Init(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXVECTOR2 size)
 	// 種類の設定
 	BindTexture(CManager::GetTextureLoad()->m_TextureMp["BOSSTURRETBROKEN"]);
 	SetObjType(OBJTYPE_DEBRIS);
-	SetPriority(2);
 	return S_OK;
 }
 

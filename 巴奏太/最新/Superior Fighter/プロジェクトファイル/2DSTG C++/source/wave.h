@@ -15,6 +15,7 @@
 //*****************************************************************************
 // マクロ定義
 //*****************************************************************************
+#define WAVE_DRAWPRIORITY (4)	// 描画優先度
 #define WAVE_SPRITE_POSITION (D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 300.0f, 0))	// ウェーブの画像を置く場所
 #define WAVE_SPRITE_SIZE (D3DXVECTOR2(500, 150))											// ウェーブの画像のサイズ
 #define WAVE_HEAL (7)				// ウェーブ終了時の回復量
@@ -52,13 +53,6 @@ public:
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
-
-	void SetPos(D3DXVECTOR3 pos) {};
-	void SetRot(D3DXVECTOR3 rot) {};
-	void SetSize(D3DXVECTOR2 size) {};
-	D3DXVECTOR3 GetPos(void) { return VECTOR3_ZERO; }
-	D3DXVECTOR3 GetRot(void) { return VECTOR3_ZERO; }
-	D3DXVECTOR2 GetSize(void) { return (D3DXVECTOR2)VECTOR3_ZERO; }
 
 	void WaveStart(void) { m_bStart = true; }
 	void EnemyDied(void) { m_nEnemyAlive--; }

@@ -26,10 +26,10 @@ D3DXVECTOR3 CCamera::m_posDest = CCamera::m_pos;
 //=============================================================================
 CCamera::CCamera()
 {
-	m_bShaking = false;
-	m_nShakeFrame = 0;
-	m_nFrameCounter = 0;
-	m_fMagnitude = 0.0f;
+	m_shake.bActive = false;
+	m_shake.nFrames = 0;
+	m_shake.nCounter = 0;
+	m_shake.fMagnitude = 0.0f;
 }
 
 //=============================================================================
@@ -130,17 +130,17 @@ void CCamera::CheckViewArea(void)
 void CCamera::ShakeProc(void)
 {
 	// 揺らすフラグが立ってる時
-	if (m_bShaking)
+	if (m_shake.bActive)
 	{
-		m_nFrameCounter++;	// フレームをカウントする
+		m_shake.nCounter++;	// フレームをカウントする
 
 		// ランダム方向にカメラをずらす
 		float fRandAngle = D3DXToRadian(rand() % 360);
-		D3DXVECTOR3 randVec = D3DXVECTOR3(sinf(fRandAngle) * m_fMagnitude, cosf(fRandAngle) * m_fMagnitude, 0.0f);
+		D3DXVECTOR3 randVec = D3DXVECTOR3(sinf(fRandAngle) * m_shake.fMagnitude, cosf(fRandAngle) * m_shake.fMagnitude, 0.0f);
 		m_pos = m_posDest + randVec;
 
 		// 指定フレーム数を超えたらフラグ下ろす
-		if (m_nFrameCounter >= m_nShakeFrame) m_bShaking = false;
+		if (m_shake.nCounter >= m_shake.nFrames) m_shake.bActive = false;
 	}
 	else
 	{
@@ -155,11 +155,11 @@ void CCamera::ShakeProc(void)
 //=============================================================================
 void CCamera::Shake(float fMagnitude, int nFrame)
 {
-	if (!m_bShaking)
+	if (!m_shake.bActive)
 	{
-		m_bShaking = true;
-		m_fMagnitude = fMagnitude;
-		m_nShakeFrame = nFrame;
+		m_shake.bActive = true;
+		m_shake.fMagnitude = fMagnitude;
+		m_shake.nFrames = nFrame;
 	}
 }
 
@@ -167,9 +167,9 @@ void CCamera::Shake(bool stop)
 {
 	if (!stop)
 	{
-		m_bShaking = false;
-		m_fMagnitude = 0.0f;
-		m_nFrameCounter = 0;
-		m_nShakeFrame = 0;
+		m_shake.bActive = false;
+		m_shake.fMagnitude = 0.0f;
+		m_shake.nCounter = 0;
+		m_shake.nFrames = 0;
 	}
 }

@@ -50,16 +50,6 @@ public:
 	void Update(void);
 	void Draw(void);
 
-	// Set
-	void SetPos(D3DXVECTOR3 pos) {};
-	void SetRot(D3DXVECTOR3 rot) {};
-	void SetSize(D3DXVECTOR2 size) {};
-
-	// Get
-	D3DXVECTOR3 GetPos(void) { return VECTOR3_ZERO; }
-	D3DXVECTOR3 GetRot(void) { return VECTOR3_ZERO; }
-	D3DXVECTOR2 GetSize(void) { return (D3DXVECTOR2)VECTOR3_ZERO; }
-
 	int GetLife(void) { return m_nLife; }
 	void Damage(int nValue);
 	void Heal(int nValue);

@@ -24,8 +24,6 @@
 // 前方宣言
 //*****************************************************************************
 class CPlayer;
-class CBackground;
-class CEnemy;
 class CScore;
 class CLife;
 class CCrosshair;
@@ -35,6 +33,7 @@ class CMiniMap;
 class CEnergy;
 class CBossManager;
 class CBackground3D;
+class CCollision;
 
 //*****************************************************************************
 // ゲーム画面クラス ( 継承元: オブジェクトクラス [CScene] )
@@ -60,20 +59,11 @@ public:
 	void Update(void);
 	void Draw(void);
 
-	void SetPos(D3DXVECTOR3 pos) {};
-	void SetRot(D3DXVECTOR3 rot) {};
-	void SetSize(D3DXVECTOR2 size) {};
-	D3DXVECTOR3 GetPos(void) { return VECTOR3_ZERO; }
-	D3DXVECTOR3 GetRot(void) { return VECTOR3_ZERO; }
-	D3DXVECTOR2 GetSize(void) { return (D3DXVECTOR2)VECTOR3_ZERO; }
-
 	static void SetGameStatus(GAMESTATUS status) { m_status = status; }
 	static GAMESTATUS GetGameStatus(void) { return m_status; }
 	static CPlayer *GetPlayer(void) { return m_pPlayer; }
-	static CBackground *GetBG(void) { return m_pBG; }
 	static CScore *GetScore(void) { return m_pScore; }
 	static CLife *GetLife(void) { return m_pLife; }
-	static CEnemy **GetEnemy(void) { return m_apEnemy; }
 	static CCrosshair *GetCrosshair(void) { return m_pCrosshair; }
 	static CWave *GetWave(void) { return m_pWave; }
 	static CHelp *GetHelp(void) { return m_pHelp; }
@@ -81,12 +71,11 @@ public:
 	static CEnergy *GetEnergy(void) { return m_pEnergy; }
 	static CBossManager *GetBoss(void) { return m_pBoss; }
 	static CBackground3D *GetBG3D(void) { return m_pBG3D; }
+	static CCollision *GetCollision(void) { return m_pCollision; }
 
 private:
 	static GAMESTATUS m_status;
 	static CPlayer *m_pPlayer;
-	static CBackground *m_pBG;
-	static CEnemy *m_apEnemy[ENEMY_MAX];
 	static CScore *m_pScore;
 	static CLife *m_pLife;
 	static CCrosshair *m_pCrosshair;
@@ -96,6 +85,7 @@ private:
 	static CEnergy *m_pEnergy;
 	static CBossManager *m_pBoss;
 	static CBackground3D *m_pBG3D;
+	static CCollision *m_pCollision;
 };
 #endif
 

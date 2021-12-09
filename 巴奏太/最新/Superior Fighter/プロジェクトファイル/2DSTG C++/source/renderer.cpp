@@ -20,7 +20,9 @@
 //=============================================================================
 CRenderer::CRenderer()
 {
-
+	m_FBParam.bActive = false;
+	m_FBParam.fOpacity = TARGET_OPACITYDEF;
+	m_FBParam.fSizeOffset = TARGET_SIZEOFFSETDEF;
 }
 
 //=============================================================================
@@ -112,9 +114,98 @@ HRESULT CRenderer::Init(HWND hWnd, BOOL bWindow)
 	m_pD3DDevice->SetTextureStageState(0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
 	m_pD3DDevice->SetTextureStageState(0, D3DTSS_ALPHAARG2, D3DTA_CURRENT);
 
-#ifdef _DEBUG
-	//m_pD3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
-#endif
+	LPDIRECT3DSURFACE9 pRenderDef, pBuffDef;	// 保存用
+	for (int nCnt = 0; nCnt < 2; nCnt++) {
+		// レンダリングターゲット用テクスチャ生成
+		m_pD3DDevice->CreateTexture(
+			SCREEN_WIDTH,
+			SCREEN_HEIGHT,
+			1,
+			D3DUSAGE_RENDERTARGET,
+			D3DFMT_A8R8G8B8,
+			D3DPOOL_DEFAULT,
+			&m_apTextureMT[nCnt],
+			NULL);
+
+		// テクスチャレンダリング用インターフェース生成
+		m_apTextureMT[nCnt]->GetSurfaceLevel(0, &m_apRenderMT[nCnt]);
+
+		// テクスチャレンダリング用Zバッファ生成
+		m_pD3DDevice->CreateDepthStencilSurface(
+			SCREEN_WIDTH,
+			SCREEN_HEIGHT,
+			D3DFMT_D16,
+			D3DMULTISAMPLE_NONE,
+			0,
+			TRUE,
+			&m_apBuffMT[nCnt],
+			NULL);
+
+		// 現在のレンダリングターゲットを取得 (保存)
+		m_pD3DDevice->GetRenderTarget(0, &pRenderDef);
+
+		// 現在のZバッファを取得 (保存)
+		m_pD3DDevice->GetDepthStencilSurface(&pBuffDef);
+
+		// レンダリングターゲットを生成したテクスチャに設定
+		m_pD3DDevice->SetRenderTarget(0, m_apRenderMT[nCnt]);
+
+		// Zバッファを設定
+		m_pD3DDevice->SetDepthStencilSurface(m_apBuffMT[nCnt]);
+
+		// レンダリングターゲット用のサーフェイスをクリア
+		m_pD3DDevice->Clear(
+			0,
+			NULL,
+			D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER,
+			D3DCOLOR_RGBA(0, 0, 0, 0),
+			1.0f,
+			0);
+
+		// レンダリングターゲットを元に戻す
+		m_pD3DDevice->SetRenderTarget(0, pRenderDef);
+
+		// Zバッファを元に戻す
+		m_pD3DDevice->SetDepthStencilSurface(pBuffDef);
+	}
+
+	// テクスチャレンダリング用ビューポートの設定
+	m_viewportMT.X = 0;
+	m_viewportMT.Y = 0;
+	m_viewportMT.Width = SCREEN_WIDTH;
+	m_viewportMT.Height = SCREEN_HEIGHT;
+	m_viewportMT.MinZ = 0.0f;
+	m_viewportMT.MaxZ = 1.0f;
+
+	// 頂点バッファの生成
+	if (FAILED(m_pD3DDevice->CreateVertexBuffer(sizeof(CScene2D::VERTEX_2D) * 4, D3DUSAGE_WRITEONLY, FVF_VERTEX_2D, D3DPOOL_MANAGED, &m_pVtxBuffMT, NULL)))
+	{
+		return E_FAIL;
+	}
+
+	// 頂点バッファをロック
+	CScene2D::VERTEX_2D *pVtx;
+	m_pVtxBuffMT->Lock(0, 0, (void**)&pVtx, 0);
+
+	float fOff = TARGET_OFFSET;
+	D3DXVECTOR2 pos = SCREEN_CENTER;
+	pVtx[0].pos = D3DXVECTOR3(-TARGET_SIZE.x / 2 + pos.x - fOff, TARGET_SIZE.y / 2 + pos.y - fOff, 0.0f);
+	pVtx[1].pos = D3DXVECTOR3(-TARGET_SIZE.x / 2 + pos.x - fOff, -TARGET_SIZE.y / 2 + pos.y - fOff, 0.0f);
+	pVtx[2].pos = D3DXVECTOR3(TARGET_SIZE.x / 2 + pos.x - fOff, TARGET_SIZE.y / 2 + pos.y - fOff, 0.0f);
+	pVtx[3].pos = D3DXVECTOR3(TARGET_SIZE.x / 2 + pos.x - fOff, -TARGET_SIZE.y / 2 + pos.y - fOff, 0.0f);
+
+	pVtx[0].tex = D3DXVECTOR2(0.0f, 1.0f);
+	pVtx[1].tex = D3DXVECTOR2(0.0f, 0.0f);
+	pVtx[2].tex = D3DXVECTOR2(1.0f, 1.0f);
+	pVtx[3].tex = D3DXVECTOR2(1.0f, 0.0f);
+
+	for (int nCntVtx = 0; nCntVtx < 4; nCntVtx++) {
+		pVtx[nCntVtx].col = D3DXCOLOR(1, 1, 1, 1);
+		pVtx[nCntVtx].rhw = 1.0f;
+	}
+
+	// 頂点バッファアンロック
+	m_pVtxBuffMT->Unlock();
 
 	return S_OK;
 }
@@ -124,14 +215,31 @@ HRESULT CRenderer::Init(HWND hWnd, BOOL bWindow)
 //=============================================================================
 void CRenderer::Uninit(void)
 {
-#ifdef _DEBUG
-	// デバッグ情報表示用フォントの破棄
-	if (m_pFont != NULL)
-	{
-		m_pFont->Release();
-		m_pFont = NULL;
+	for (int nCntMT = 0; nCntMT < 2; nCntMT++) {
+		// レンダリングターゲット用テクスチャを破棄
+		if (m_apTextureMT[nCntMT] != NULL) {
+			m_apTextureMT[nCntMT]->Release();
+			m_apTextureMT[nCntMT] = NULL;
+		}
+
+		// テクスチャレンダリング用インターフェースを破棄
+		if (m_apRenderMT[nCntMT] != NULL) {
+			m_apRenderMT[nCntMT]->Release();
+			m_apRenderMT[nCntMT] = NULL;
+		}
+
+		// テクスチャレンダリング用Zバッファを破棄
+		if (m_apBuffMT[nCntMT] != NULL) {
+			m_apBuffMT[nCntMT]->Release();
+			m_apBuffMT[nCntMT] = NULL;
+		}
 	}
-#endif
+
+	// 頂点バッファ破棄
+	if (m_pVtxBuffMT != NULL) {
+		m_pVtxBuffMT->Release();
+		m_pVtxBuffMT = NULL;
+	}
 
 	// デバイスの破棄
 	if (m_pD3DDevice != NULL)
@@ -153,6 +261,9 @@ void CRenderer::Uninit(void)
 //=============================================================================
 void CRenderer::Update(void)
 {
+	// エフェクト用のカウンター
+	CountFrame();
+
 	// すべてのオブジェクトの更新
 	CScene::UpdateAll();
 }
@@ -162,12 +273,34 @@ void CRenderer::Update(void)
 //=============================================================================
 void CRenderer::Draw(void)
 {
+	LPDIRECT3DSURFACE9 pRenderDef, pBuffDef;	// レンダーターゲット、Zバッファ保存用
+	D3DVIEWPORT9 viewportDef;					// ビューポート保存用
+
 	// バックバッファ＆Ｚバッファのクリア
 	m_pD3DDevice->Clear(0, NULL, (D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER), D3DCOLOR_RGBA(0, 0, 0, 0), 1.0f, 0);
 
 	// Direct3Dによる描画の開始
 	if (SUCCEEDED(m_pD3DDevice->BeginScene()))
 	{
+		// 現在のレンダーターゲットを保存
+		m_pD3DDevice->GetRenderTarget(0, &pRenderDef);
+		m_pD3DDevice->GetDepthStencilSurface(&pBuffDef);
+		m_pD3DDevice->GetViewport(&viewportDef);
+
+		// レンダーターゲットをテクスチャ0に設定
+		m_pD3DDevice->SetRenderTarget(0, m_apRenderMT[0]);
+		m_pD3DDevice->SetDepthStencilSurface(m_apBuffMT[0]);
+		m_pD3DDevice->SetViewport(&m_viewportMT);
+
+		// テクスチャ0をクリア
+		m_pD3DDevice->Clear(
+			0,
+			NULL,
+			D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER,
+			D3DCOLOR_RGBA(0, 0, 0, 0),
+			1.0f,
+			0);
+
 		// カメラを設置
 		CManager::GetCamera3D()->SetCamera(m_pD3DDevice);
 
@@ -180,6 +313,23 @@ void CRenderer::Draw(void)
 #ifdef _DEBUG
 		CManager::GetDebugger()->Draw();
 #endif
+		// フラグが立っていたらポリゴンにテクスチャ１を貼って描画
+		if (m_FBParam.bActive)
+			TargetPolyDraw(1);
+
+		// レンダーターゲットを元に戻す
+		m_pD3DDevice->SetRenderTarget(0, pRenderDef);
+		m_pD3DDevice->SetDepthStencilSurface(pBuffDef);
+		m_pD3DDevice->SetViewport(&viewportDef);
+
+		// フィードバック用ポリゴンにテクスチャ０を貼り付けて描画
+		m_pD3DDevice->SetTextureStageState(0, D3DTSS_ALPHAOP, D3DTOP_ADD);	// 加算合成
+		TargetPolyDraw(0);
+		m_pD3DDevice->SetTextureStageState(0, D3DTSS_ALPHAOP, D3DTOP_MODULATE);
+
+		// テクスチャ0と1を入れ替える
+		swap(m_apRenderMT[0], m_apRenderMT[1]);
+		swap(m_apTextureMT[0], m_apTextureMT[1]);
 
 		// Direct3Dによる描画の終了
 		m_pD3DDevice->EndScene();
@@ -187,4 +337,85 @@ void CRenderer::Draw(void)
 
 	// バックバッファとフロントバッファの入れ替え
 	m_pD3DDevice->Present(NULL, NULL, NULL, NULL);
+}
+
+//=============================================================================
+// フィードバックエフェクトを発動
+//=============================================================================
+void CRenderer::SetFeedbackEffect(int nFrames, float fOpacity, float fSizeOffset)
+{
+	// 新しく呼ばれたフレーム数が現在より大きい場合のみ更新
+	if (m_FBParam.nFrames < nFrames) {
+		m_FBParam.nFrames = nFrames;
+		m_FBParam.fOpacity = fOpacity;
+		m_FBParam.fSizeOffset = fSizeOffset;
+		m_FBParam.nCounter = 0;
+		m_FBParam.bActive = true;
+	}
+}
+void CRenderer::SetFeedbackEffect(int nFrames)
+{
+	// 新しく呼ばれたフレーム数が現在より大きい場合のみ更新
+	if (m_FBParam.nFrames < nFrames) {
+		m_FBParam.nFrames = nFrames;
+		m_FBParam.fOpacity = TARGET_OPACITYDEF;
+		m_FBParam.fSizeOffset = TARGET_SIZEOFFSETDEF;
+		m_FBParam.nCounter = 0;
+		m_FBParam.bActive = true;
+	}
+}
+
+//*****************************************************************************
+// エフェクトを発動するフレームをカウントする
+//*****************************************************************************
+void CRenderer::CountFrame(void)
+{
+	// 発動中
+	if (m_FBParam.bActive) {
+		m_FBParam.nCounter++;	// カウントアップ
+		
+		// カウント終了
+		if (m_FBParam.nCounter >= m_FBParam.nFrames) {
+			m_FBParam.bActive = false;
+			m_FBParam.nCounter = 0;
+			m_FBParam.nFrames = 0;
+		}
+	}
+}
+
+//*****************************************************************************
+// フィードバック用ポリゴンを描画
+//*****************************************************************************
+void CRenderer::TargetPolyDraw(int nTextureIdx)
+{
+	// 頂点バッファをロック
+	CScene2D::VERTEX_2D *pVtx;
+	m_pVtxBuffMT->Lock(0, 0, (void**)&pVtx, 0);
+
+	float fOff = TARGET_OFFSET;
+	D3DXVECTOR2 pos = SCREEN_CENTER;
+	D3DXVECTOR2 size = TARGET_SIZE;
+
+	if (nTextureIdx != 0)
+		size = D3DXVECTOR2(size.x - m_FBParam.fSizeOffset, size.y - m_FBParam.fSizeOffset);
+
+	pVtx[0].pos = D3DXVECTOR3(-size.x / 2 + pos.x - fOff, size.y / 2 + pos.y - fOff, 0.0f);
+	pVtx[1].pos = D3DXVECTOR3(-size.x / 2 + pos.x - fOff, -size.y / 2 + pos.y - fOff, 0.0f);
+	pVtx[2].pos = D3DXVECTOR3(size.x / 2 + pos.x - fOff, size.y / 2 + pos.y - fOff, 0.0f);
+	pVtx[3].pos = D3DXVECTOR3(size.x / 2 + pos.x - fOff, -size.y / 2 + pos.y - fOff, 0.0f);
+
+	for (int nCntVtx = 0; nCntVtx < 4; nCntVtx++) {
+		if (nTextureIdx == 0)
+			pVtx[nCntVtx].col = D3DXCOLOR(1, 1, 1, 1);
+		else
+			pVtx[nCntVtx].col = D3DXCOLOR(1, 1, 1, m_FBParam.fOpacity);
+	}
+	// 頂点バッファアンロック
+	m_pVtxBuffMT->Unlock();
+
+	// フィードバック用ポリゴンにテクスチャを貼り付けて描画
+	m_pD3DDevice->SetStreamSource(0, m_pVtxBuffMT, 0, sizeof(CScene2D::VERTEX_2D));
+	m_pD3DDevice->SetFVF(FVF_VERTEX_2D);
+	m_pD3DDevice->SetTexture(0, m_apTextureMT[nTextureIdx]);
+	m_pD3DDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
 }

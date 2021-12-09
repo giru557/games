@@ -10,7 +10,6 @@
 // 静的メンバ変数
 //*****************************************************************************
 vector <CScene*> CScene::m_aSceneVc[SCENE_PRIORITY_MAX];
-int CScene::m_nNumAll;
 
 //*****************************************************************************
 // オブジェクトクラス (基本)
@@ -26,7 +25,6 @@ CScene::CScene(int nPriority)
 	// 優先度を記録
 	// オブジェクトの種類を初期化
 	m_aSceneVc[nPriority].push_back(this);
-	m_nNumAll++;
 	m_nPriority = nPriority;
 	m_objType = OBJTYPE_NONE;
 }
@@ -139,7 +137,6 @@ void CScene::Release(void)
 		if (m_aSceneVc[m_nPriority][i] == this) {
 			int nPriority = m_nPriority;
 			m_aSceneVc[nPriority].erase(m_aSceneVc[nPriority].begin() + i);
-			m_nNumAll--;
 			break;
 		}
 	}

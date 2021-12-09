@@ -10,11 +10,7 @@
 #include "fade.h"
 #include "camera.h"
 #include "game.h"
-
-//*****************************************************************************
-// 静的メンバ変数
-//*****************************************************************************
-LPDIRECT3DTEXTURE9 CResult::m_apTexture[RESULT_TEXTURE_COUNT] = {};
+#include "textureloader.h"
 
 //*****************************************************************************
 // リザルトクラス ( 継承元: オブジェクトクラス [scene] )
@@ -44,27 +40,16 @@ HRESULT CResult::Init(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXVECTOR2 size)
 	// デバイス取得
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
 
-	// テクスチャの生成
-	if (FAILED(D3DXCreateTextureFromFile(pDevice, RESULT_TEXTURE_0_FILEPATH, &m_apTexture[0])) ||
-		FAILED(D3DXCreateTextureFromFile(pDevice, RESULT_TEXTURE_1_FILEPATH, &m_apTexture[1])))
-	{
-		return E_FAIL;
-	}
-
 	// オブジェクト生成
 	m_pScene2D = CScene2D::Create((D3DXVECTOR3)SCREEN_CENTER, VECTOR3_ZERO, D3DXVECTOR2(SCREEN_WIDTH, SCREEN_HEIGHT));
 
 	// ゲームの終了状況を見てテクスチャを決める
-	CGame::GAMESTATUS status = CGame::GetGameStatus();
-	if (status == CGame::GAMESTATUS_CLEAR)
-	{
-		m_pScene2D->BindTexture(m_apTexture[0]);
-	}
-	else if (status == CGame::GAMESTATUS_OVER)
-	{
-		m_pScene2D->BindTexture(m_apTexture[1]);
-	}
+	if (CGame::GetGameStatus() == CGame::GAMESTATUS_CLEAR)
+		m_pScene2D->BindTexture(CManager::GetTextureLoad()->m_TextureMp["GAMECLEAR"]);
+	else if (CGame::GetGameStatus() == CGame::GAMESTATUS_OVER)
+		m_pScene2D->BindTexture(CManager::GetTextureLoad()->m_TextureMp["GAMEOVER"]);
 
+	// カメラの中心を戻す
 	CCamera *pCamera = CManager::GetCamera();
 	pCamera->SetCameraCenter((D3DXVECTOR3)SCREEN_CENTER);
 
@@ -76,16 +61,13 @@ HRESULT CResult::Init(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXVECTOR2 size)
 //=============================================================================
 void CResult::Uninit(void)
 {
-	for (int nCntTex = 0; nCntTex < RESULT_TEXTURE_COUNT; nCntTex++)
-	{
-		if (m_apTexture[nCntTex] != NULL)
-		{
-			m_apTexture[nCntTex]->Release();
-			m_apTexture[nCntTex] = NULL;
-		}
+	// 背景のポリゴンオブジェクトを破棄
+	if (m_pScene2D != NULL) {
+		m_pScene2D->Uninit();
+		m_pScene2D = NULL;
 	}
-	m_pScene2D->Uninit();
-	m_pScene2D = NULL;
+
+	// 開放
 	Release();
 }
 
@@ -94,9 +76,8 @@ void CResult::Uninit(void)
 //=============================================================================
 void CResult::Update(void)
 {
-	CInputKeyboard *pKeyboard = CManager::GetInputKeyboard();
-
-	if (pKeyboard->GetTrigger(DIK_RETURN) == true)
+	// エンターキー
+	if (CManager::GetInputKeyboard()->GetTrigger(DIK_RETURN) == true)
 	{
 		// フェードアウトして次のモード
 		CManager::GetFade()->FadeOUT(CManager::MODE_TITLE);
